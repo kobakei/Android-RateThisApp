@@ -3,6 +3,8 @@ Android-RateThisApp
 
 Android-RateThisApp is an library to show "Rate this app" dialog.
 
+![Screen shot](https://raw.github.com/kskkbys/Android-RateThisApp/master/screenshot_resized.png)
+
 The library monitors the following status
 
 * How many times is the app launched
