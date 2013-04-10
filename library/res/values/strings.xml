@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Rate this app</string>
+    <string name="rta_dialog_message">If you enjoy this app, please take a moment to rate this app. It won\'t take more than a minute. Thank you for your support!</string>
+    <string name="rta_dialog_ok">Rate now</string>
+    <string name="rta_dialog_cancel">Remind later</string>
+    <string name="rta_dialog_no">No, thanks</string>
+
+</resources>

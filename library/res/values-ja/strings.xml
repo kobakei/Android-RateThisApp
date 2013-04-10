@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">アプリをレビューしませんか？</string>
+    <string name="rta_dialog_message">このアプリを気に入っていただいたら、ぜひレビューしてください。レビューは１分未満で終わります。</string>
+    <string name="rta_dialog_ok">はい</string>
+    <string name="rta_dialog_cancel">あとで</string>
+    <string name="rta_dialog_no">いいえ</string>
+
+</resources>
