@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/**
+ * Sample application of RateThisApp
+ */
 public class MainActivity extends Activity {
 
 	@Override
@@ -24,7 +27,9 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		RateThisApp.onLaunchApp(this);
+		// Monitor launch times and interval from installation
+		RateThisApp.onStart(this);
+		// Show a dialog if criteria is satisfied
 		RateThisApp.showRateDialogIfNeeded(this);
 	}
 

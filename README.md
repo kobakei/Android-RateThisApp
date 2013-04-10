@@ -21,14 +21,14 @@ git clone git://github.com:kskkbys/Android-RateThisApp.git
 Import Android-RateThisApp/library in Eclispe. Then, link your application project with this library.
 
 ### Implementation
-Call `RateThisApp.onAppLaunched(Context)` and `RateThisApp.showRateDialogIfNeeded(Context)` in your launcher activity's onStart() method.
+Call `RateThisApp.onStart(Context)` and `RateThisApp.showRateDialogIfNeeded(Context)` in your launcher activity's onStart() method.
 ```java
 @Override
 protected void onStart() {
     super.onStart();
-    
+
     // Monitor launch times and interval from installation
-    RateThisApp.onAppLaunched(this);
+    RateThisApp.onStart(this);
     // If the criteria is satisfied, "Rate this app" dialog will be shown
     RateThisApp.showRateDialogIfNeeded(this);
 }

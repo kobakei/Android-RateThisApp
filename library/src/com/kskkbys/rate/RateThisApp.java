@@ -39,27 +39,31 @@ public class RateThisApp {
 	/**
 	 * App launching times until showing rate dialog
 	 */
-	public static final int LAUNCH_TIMES = 5;
+	public static final int LAUNCH_TIMES = 10;
 	
 	/**
-	 * Call this API when the app is launched.<br>
+	 * If true, print LogCat
+	 */
+	public static final boolean DEBUG = false;
+	
+	/**
+	 * Call this API when the launcher activity is launched.<br>
 	 * It is better to call this API in onStart() of the launcher activity.
 	 */
-	public static void onLaunchApp(Context context) {
-		Log.v(TAG, "onLaunchApp");
+	public static void onStart(Context context) {
 		SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 		Editor editor = pref.edit();
 		// If it is the first launch, save the date in shared preference.
 		if (pref.getLong(KEY_INSTALL_DATE, 0) == 0L) {
 			Date now = new Date();
 			editor.putLong(KEY_INSTALL_DATE, now.getTime());
-			Log.v(TAG, "First install: " + now.toString());
+			log("First install: " + now.toString());
 		}
 		// Increment launch times
 		int launchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
 		launchTimes++;
 		editor.putInt(KEY_LAUNCH_TIMES, launchTimes);
-		Log.v(TAG, "Launch times; " + launchTimes);
+		log("Launch times; " + launchTimes);
 		
 		editor.commit();
 		
@@ -168,9 +172,19 @@ public class RateThisApp {
 	 */
 	private static void printStatus(final Context context) {
 		SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-		Log.v(TAG, "*** Status ***");
-		Log.v(TAG, "Install Date: " + new Date(pref.getLong(KEY_INSTALL_DATE, 0)));
-		Log.v(TAG, "Launch Times: " + pref.getInt(KEY_LAUNCH_TIMES, 0));
-		Log.v(TAG, "Opt out: " + pref.getBoolean(KEY_OPT_OUT, false));
+		log("*** RateThisApp Status ***");
+		log("Install Date: " + new Date(pref.getLong(KEY_INSTALL_DATE, 0)));
+		log("Launch Times: " + pref.getInt(KEY_LAUNCH_TIMES, 0));
+		log("Opt out: " + pref.getBoolean(KEY_OPT_OUT, false));
+	}
+	
+	/**
+	 * Print log if enabled
+	 * @param message
+	 */
+	private static void log(String message) {
+		if (DEBUG) {
+			Log.v(TAG, message);
+		}
 	}
 }
