@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Bu uygulamaya puan verin</string>
+    <string name="rta_dialog_message">Eğer uygulamamızdan memnun kaldıysanız, lütfen birkaç saniyenizi ayırarak bize puan verin. Desteğiniz için teşekkürler!</string>
+    <string name="rta_dialog_ok">Puan ver</string>
+    <string name="rta_dialog_cancel">Hatırlat</string>
+    <string name="rta_dialog_no">Hayır, teşekkürler</string>
+
+</resources>
