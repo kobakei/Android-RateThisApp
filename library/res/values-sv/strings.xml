@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Betygsätt appen</string>
+    <string name="rta_dialog_message">Om du gillar denna app, sätt gärna betyg på den. Det tar inte mer än ett ögonblick. Tack för ditt stöd!</string>
+    <string name="rta_dialog_ok">Betygsätt nu</string>
+    <string name="rta_dialog_cancel">Senare</string>
+    <string name="rta_dialog_no">Nej, tack</string>
+
+</resources>
