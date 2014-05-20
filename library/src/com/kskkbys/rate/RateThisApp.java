@@ -110,7 +110,7 @@ public class RateThisApp {
 			if (mLaunchTimes >= LAUNCH_TIMES) {
 				return true;
 			}
-			int threshold = INSTALL_DAYS * 24 * 60 * 60 * 1000;	// msec
+			long threshold = INSTALL_DAYS * 24 * 60 * 60 * 1000L;	// msec
 			if (new Date().getTime() - mInstallDate.getTime() >= threshold) {
 				return true;
 			}
