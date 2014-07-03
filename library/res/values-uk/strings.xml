@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Оцініть цей додаток</string>
+    <string name="rta_dialog_message">Якщо Вам сподобався цей додаток, будь ласка, знайдіть час, щоб оцінити його. Це займе не більше хвилини. Дякую за пітримку!</string>
+    <string name="rta_dialog_ok">Оцінити зараз</string>
+    <string name="rta_dialog_cancel">Нагадати пізніше</string>
+    <string name="rta_dialog_no">Ні, дякую</string>
+
+</resources>
