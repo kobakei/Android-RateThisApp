@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">앱 평가하기</string>
+    <string name="rta_dialog_message">이 앱이 만족스럽다면 평가를 부탁드립니다. 일분도 걸리지 않아요. 지원에 감사합니다. </string>
+    <string name="rta_dialog_ok">지금 평가하기</string>
+    <string name="rta_dialog_cancel">나중에 할게요</string>
+    <string name="rta_dialog_no">안 할래요</string>
+
+</resources>
