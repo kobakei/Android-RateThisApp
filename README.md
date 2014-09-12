@@ -16,7 +16,7 @@ and show a dialog to engage users to rate the app in Google Play.
 
 ### Download
 ```sh
-git clone git://github.com:kskkbys/Android-RateThisApp.git
+git clone git@github.com:kskkbys/Android-RateThisApp.git
 ```
 
 ### Setting on Eclipse
