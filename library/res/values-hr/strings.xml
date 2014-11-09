@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rta_dialog_title">Ocijeni aplikaciju</string>
+    <string name="rta_dialog_message">Ako Vam se sviđa ova aplikacija, molimo Vas da odvojite trenutak kako bi je ocijenili. Neće trajati više od minute. Hvala!</string>
+    <string name="rta_dialog_ok">Ocijeni</string>
+    <string name="rta_dialog_cancel">Podjeti me kasnije</string>
+    <string name="rta_dialog_no">Ne, hvala</string>
+</resources>
