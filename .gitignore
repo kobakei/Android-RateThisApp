@@ -19,4 +19,7 @@ local.properties
 .classpath
 .project
 
+#Android Studio project files
+*.iml
+
 .DS_Store
