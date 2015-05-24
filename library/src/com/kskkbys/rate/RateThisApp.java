@@ -90,13 +90,17 @@ public class RateThisApp {
 	}
 	
 	/**
-	 * Show the rate dialog if the criteria is satisfied
+	 * Show the rate dialog if the criteria is satisfied.
 	 * @param context
+	 * @return true if the dialog has been shown.
 	 */
-	public static void showRateDialogIfNeeded(final Context context) {
-		if (shouldShowRateDialog()) {
+	public static boolean showRateDialogIfNeeded(final Context context) {
+		boolean shouldShow = shouldShowRateDialog(); 
+		if (shouldShow) {
 			showRateDialog(context);
 		}
+		
+		return shouldShow;
 	}
 	
 	/**
