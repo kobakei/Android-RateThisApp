@@ -46,6 +46,16 @@ public class RateThisApp {
 	private static Date mInstallDate = new Date();
 	private static int mLaunchTimes = 0;
 	private static boolean mOptOut = false;
+
+	/**
+	 * Will be used as a dialog title if set
+	 */
+	private static String dialog_title;
+
+	/**
+	 * Will be used as a dialog message if set
+	 */
+	private static String dialog_message;
 	
 	/**
 	 * Days after installation until showing rate dialog
@@ -124,8 +134,13 @@ public class RateThisApp {
 	 */
 	public static void showRateDialog(final Context context) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setTitle(R.string.rta_dialog_title);
-		builder.setMessage(R.string.rta_dialog_message);
+
+		if(dialog_title != null) builder.setTitle(dialog_title);
+		else builder.setTitle(R.string.rta_dialog_title);
+
+		if(dialog_message != null) builder.setMessage(dialog_message);
+		else builder.setMessage(R.string.rta_dialog_message);
+
 		builder.setPositiveButton(R.string.rta_dialog_ok, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -191,6 +206,22 @@ public class RateThisApp {
 		log("Install Date: " + new Date(pref.getLong(KEY_INSTALL_DATE, 0)));
 		log("Launch Times: " + pref.getInt(KEY_LAUNCH_TIMES, 0));
 		log("Opt out: " + pref.getBoolean(KEY_OPT_OUT, false));
+	}
+
+	/**
+	 * Set dialog title
+	 * @param title
+	 */
+	public static void setDialogTitle(String title) {
+		dialog_title = title;
+	}
+
+	/**
+	 * Set dialog message
+	 * @param message
+	 */
+	public static void setDialogMessage(String message) {
+		dialog_message = message;
 	}
 	
 	/**
