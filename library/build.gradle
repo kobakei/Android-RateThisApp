@@ -9,8 +9,17 @@ buildscript {
     }
 }
 
-repositories {
-    mavenCentral()
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository url: "file://${projectDir}/repository"
+            pom.groupId = 'com.kobakei'
+            pom.artifactId = 'ratethisapp'
+            pom.version = '0.0.1'
+        }
+    }
 }
 
 android {
