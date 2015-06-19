@@ -5,7 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:1.0.0"
+        classpath "com.android.tools.build:gradle:1.2.3"
     }
 }
 
@@ -14,8 +14,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "20"
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
 
     sourceSets {
         main { // Use old Ant-build directory layout
