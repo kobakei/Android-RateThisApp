@@ -31,7 +31,7 @@ import android.util.Log;
 /**
  * RateThisApp<br>
  * A library to show the app rate dialog
- * @author Keisuke Kobayashi <k.kobayashi.122@gmail.com>
+ * @author Keisuke Kobayashi (k.kobayashi.122@gmail.com)
  *
  */
 public class RateThisApp {
@@ -64,6 +64,7 @@ public class RateThisApp {
 	/**
 	 * Call this API when the launcher activity is launched.<br>
 	 * It is better to call this API in onStart() of the launcher activity.
+	 * @param context Context
 	 */
 	public static void onStart(Context context) {
 		SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
