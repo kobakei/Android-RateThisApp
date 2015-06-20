@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Keisuke Kobayashi
+ * Copyright 2013-2015 Keisuke Kobayashi
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import android.util.Log;
 /**
  * RateThisApp<br>
  * A library to show the app rate dialog
- * @author Keisuke Kobayashi <k.kobayashi.122@gmail.com>
+ * @author Keisuke Kobayashi (k.kobayashi.122@gmail.com)
  *
  */
 public class RateThisApp {
@@ -64,6 +64,7 @@ public class RateThisApp {
 	/**
 	 * Call this API when the launcher activity is launched.<br>
 	 * It is better to call this API in onStart() of the launcher activity.
+	 * @param context Context
 	 */
 	public static void onStart(Context context) {
 		SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);

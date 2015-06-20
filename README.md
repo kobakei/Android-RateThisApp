@@ -3,7 +3,7 @@ Android-RateThisApp
 
 Android-RateThisApp is an library to show "Rate this app" dialog.
 
-![Screen shot](https://raw.github.com/kskkbys/Android-RateThisApp/master/screenshot_resized.png)
+![Screen shot](https://raw.github.com/kobakei/Android-RateThisApp/master/screenshot_resized.png)
 
 The library monitors the following status
 
@@ -12,17 +12,18 @@ The library monitors the following status
 
 and show a dialog to engage users to rate the app in Google Play.
 
-## How to use
+## Getting Started
 
-### Download
-```sh
-git clone git@github.com:kskkbys/Android-RateThisApp.git
+### Dependency
+
+```
+dependencies {
+    compile 'com.kobakei:ratethisapp:0.0.1'
+}
 ```
 
-### Setting on Eclipse
-Import Android-RateThisApp/library in Eclispe. Then, link your application project with this library.
-
 ### Implementation
+
 Call `RateThisApp.onStart(Context)` and `RateThisApp.showRateDialogIfNeeded(Context)` in your launcher activity's onStart() method.
 ```java
 @Override
@@ -37,6 +38,7 @@ protected void onStart() {
 ```
 
 ### Custom criteria
+
 The default criteria to show the dialog is as below:
 
 * App is launched more than 10 times
@@ -45,11 +47,28 @@ The default criteria to show the dialog is as below:
 If you want to use your own criteria, please edit constants in RateThisApp.java.
 
 ## Contribute this project
+
 If you want to contribute this project, please send pull request.
 In present, I need contributors who can translate resources from English/Japanese into Spanish, Chinese and other languages.
 
 ## License
-This software is licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
+
+```
+Copyright 2013-2015 Keisuke Kobayashi
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
 
 ## Author
+
 Keisuke Kobayashi - k.kobayashi.122@gmail.com
