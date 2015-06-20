@@ -18,13 +18,14 @@ and show a dialog to engage users to rate the app in Google Play.
 
 ```
 dependencies {
-    compile 'com.kobakei:ratethisapp:0.0.1'
+    compile 'com.kobakei:ratethisapp:0.0.2'
 }
 ```
 
 ### Implementation
 
 Call `RateThisApp.onStart(Context)` and `RateThisApp.showRateDialogIfNeeded(Context)` in your launcher activity's onStart() method.
+
 ```java
 @Override
 protected void onStart() {
@@ -44,7 +45,16 @@ The default criteria to show the dialog is as below:
 * App is launched more than 10 times
 * App is launched more than 7 days later than installation.
 
-If you want to use your own criteria, please edit constants in RateThisApp.java.
+If you want to use your own criteria, please call `RateThisApp.init(Configuration)` in your Application or launcher activity onCreate method.
+
+```java
+// Custom criteria: 3 days and 5 launches
+Configuration config = new Configuration(3, 5);
+// Custom title and message
+config.setTitle(R.string.my_own_title);
+config.setMessage(R.string.my_own_message);
+RateThisApp.init(config);
+```
 
 ## Contribute this project
 
