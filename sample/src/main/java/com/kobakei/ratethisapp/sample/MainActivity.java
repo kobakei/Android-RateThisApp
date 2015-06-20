@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.kskkbys.rtasample;
+package com.kobakei.ratethisapp.sample;
 
-import com.kskkbys.rate.RateThisApp;
+import com.kobakei.ratethisapp.RateThisApp;
 
 import android.os.Bundle;
 import android.app.Activity;
