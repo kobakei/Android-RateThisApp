@@ -20,32 +20,54 @@ import com.kskkbys.rate.RateThisApp;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 
 /**
  * Sample application of RateThisApp
  */
 public class MainActivity extends Activity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
-		// Monitor launch times and interval from installation
-		RateThisApp.onStart(this);
-		// Show a dialog if criteria is satisfied
-		RateThisApp.showRateDialogIfNeeded(this);
-	}
+        // Set custom criteria
+        RateThisApp.init(new RateThisApp.Config(3, 5));
+
+        /*
+        // Set custom title and message
+        RateThisApp.Config config = new RateThisApp.Config(3, 5);
+        config.setTitle(R.string.hello_world);
+        config.setMessage(R.string.hello_world);
+        RateThisApp.init(config);
+        */
+
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show rating dialog explicitly.
+                RateThisApp.showRateDialog(MainActivity.this);
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // Monitor launch times and interval from installation
+        RateThisApp.onStart(this);
+        // Show a dialog if criteria is satisfied
+        RateThisApp.showRateDialogIfNeeded(this);
+    }
 
 }
