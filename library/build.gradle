@@ -11,17 +11,6 @@ buildscript {
 
 apply plugin: 'maven'
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository url: "file://${projectDir}/repository"
-            pom.groupId = 'com.kobakei'
-            pom.artifactId = 'ratethisapp'
-            pom.version = '0.0.1'
-        }
-    }
-}
-
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -37,3 +26,5 @@ android {
       }
     }
 }
+
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
