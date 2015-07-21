@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">ประเมินแอพนี้</string>
+    <string name="rta_dialog_message">ถ้าคุณพอใจในการใช้งานแอพนี้ ขอเวลาคุณสักครู่ในการประเมินแอพ \nขอบคุณสำหรับการสนับสนุน!</string>
+    <string name="rta_dialog_ok">ประเมิน</string>
+    <string name="rta_dialog_cancel">ไว้ทีหลัง</string>
+    <string name="rta_dialog_no">ไม่, ขอบคุณ</string>
+
+</resources>
