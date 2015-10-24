@@ -18,7 +18,7 @@ and show a dialog to engage users to rate the app in Google Play.
 
 ```
 dependencies {
-    compile 'com.kobakei:ratethisapp:0.0.3'
+    compile 'com.kobakei:ratethisapp:0.0.4'
 }
 ```
 
