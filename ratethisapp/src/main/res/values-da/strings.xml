@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Bedøm appen</string>
+    <string name="rta_dialog_message">Hvis du synes om appen, må du gerne bedømme den. Det tager højst et minut. Tak for din hjælp.</string>
+    <string name="rta_dialog_ok">Bedøm nu</string>
+    <string name="rta_dialog_cancel">Senere</string>
+    <string name="rta_dialog_no">Nej tak</string>
+
+</resources>
