@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Βαθμολογήστε την εφαρμογή</string>
+    <string name="rta_dialog_message">Αν σας αρέσει αυτή η εφαρμογή θα θέλατε να τη βαθμολογήσετε;Δεν θα πάρει παραπάνω από ένα λεπτό.Ευχαριστώ για την υποστήριξη!</string>
+    <string name="rta_dialog_ok">Βαθμολογήστε τώρα</string>
+    <string name="rta_dialog_cancel">Αργότερα</string>
+    <string name="rta_dialog_no">Οχι,ευχαριστώ</string>
+
+</resources>
