@@ -1,6 +1,8 @@
 Android-RateThisApp
 ===================
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--RateThisApp-green.svg?style=true)](https://android-arsenal.com/details/1/2893)
+
 Android-RateThisApp is an library to show "Rate this app" dialog.
 
 ![Screen shot](https://raw.github.com/kobakei/Android-RateThisApp/master/screenshot_resized.png)
