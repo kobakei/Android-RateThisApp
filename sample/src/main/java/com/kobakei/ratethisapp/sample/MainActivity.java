@@ -64,12 +64,21 @@ public class MainActivity extends AppCompatActivity {
         RateThisApp.init(config);
         */
 
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button button1 = (Button) findViewById(R.id.button1);
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Show rating dialog explicitly.
                 RateThisApp.showRateDialog(MainActivity.this);
+            }
+        });
+
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show rating dialog explicitly.
+                RateThisApp.showRateDialog(MainActivity.this, R.style.MyAlertDialogStyle2);
             }
         });
     }

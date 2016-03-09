@@ -17,7 +17,6 @@ package com.kobakei.ratethisapp;
 
 import java.util.Date;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -26,6 +25,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
 /**
@@ -116,6 +116,21 @@ public class RateThisApp {
     }
 
     /**
+     * Show the rate dialog if the criteria is satisfied.
+     * @param context Context
+     * @param themeId Theme ID
+     * @return true if shown, false otherwise.
+     */
+    public static boolean showRateDialogIfNeeded(final Context context, int themeId) {
+        if (shouldShowRateDialog()) {
+            showRateDialog(context, themeId);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Check whether the rate dialog should be shown or not.
      * Developers may call this method directly if they want to show their own view instead of
      * dialog provided by this library.
@@ -142,6 +157,20 @@ public class RateThisApp {
      */
     public static void showRateDialog(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        showRateDialog(context, builder);
+    }
+
+    /**
+     * Show the rate dialog
+     * @param context
+     * @param themeId
+     */
+    public static void showRateDialog(final Context context, int themeId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, themeId);
+        showRateDialog(context, builder);
+    }
+
+    private static void showRateDialog(final Context context, AlertDialog.Builder builder) {
         int titleId = sConfig.mTitleId != 0 ? sConfig.mTitleId : R.string.rta_dialog_title;
         int messageId = sConfig.mMessageId != 0 ? sConfig.mMessageId : R.string.rta_dialog_message;
         builder.setTitle(titleId);
