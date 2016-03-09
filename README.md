@@ -1,6 +1,7 @@
 Android-RateThisApp
 ===================
 
+[![Build Status](https://circleci.com/gh/kobakei/Android-RateThisApp.svg?style=shield)](https://circleci.com/gh/kobakei/Android-RateThisApp/tree/master)
 [![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.kobakei/ratethisapp/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.kobakei/ratethisapp)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--RateThisApp-green.svg?style=true)](https://android-arsenal.com/details/1/2893)
 
