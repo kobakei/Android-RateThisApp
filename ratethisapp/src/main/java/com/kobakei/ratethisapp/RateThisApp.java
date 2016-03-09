@@ -48,6 +48,7 @@ public class RateThisApp {
     private static boolean mOptOut = false;
 
     private static Config sConfig = new Config();
+    private static Callback sCallback = null;
 
     /**
      * If true, print LogCat
@@ -60,6 +61,15 @@ public class RateThisApp {
      */
     public static void init(Config config) {
         sConfig = config;
+    }
+
+    /**
+     * Set callback instance.
+     * The callback will receive yes/no/later events.
+     * @param callback
+     */
+    public static void setCallback(Callback callback) {
+        sCallback = callback;
     }
 
     /**
@@ -106,10 +116,12 @@ public class RateThisApp {
     }
 
     /**
-     * Check whether the rate dialog shoule be shown or not
+     * Check whether the rate dialog should be shown or not.
+     * Developers may call this method directly if they want to show their own view instead of
+     * dialog provided by this library.
      * @return
      */
-    private static boolean shouldShowRateDialog() {
+    public static boolean shouldShowRateDialog() {
         if (mOptOut) {
             return false;
         } else {
@@ -137,6 +149,9 @@ public class RateThisApp {
         builder.setPositiveButton(R.string.rta_dialog_ok, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if (sCallback != null) {
+                    sCallback.onYesClicked();
+                }
                 String appPackage = context.getPackageName();
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackage));
                 context.startActivity(intent);
@@ -146,12 +161,18 @@ public class RateThisApp {
         builder.setNeutralButton(R.string.rta_dialog_cancel, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if (sCallback != null) {
+                    sCallback.onCancelClicked();
+                }
                 clearSharedPreferences(context);
             }
         });
         builder.setNegativeButton(R.string.rta_dialog_no, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if (sCallback != null) {
+                    sCallback.onNoClicked();
+                }
                 setOptOut(context, true);
             }
         });
@@ -253,5 +274,22 @@ public class RateThisApp {
         public void setMessage(int stringId) {
             this.mMessageId = stringId;
         }
+    }
+
+    public interface Callback {
+        /**
+         * "Rate now" event
+         */
+        void onYesClicked();
+
+        /**
+         * "No, thanks" event
+         */
+        void onNoClicked();
+
+        /**
+         * "Later" event
+         */
+        void onCancelClicked();
     }
 }

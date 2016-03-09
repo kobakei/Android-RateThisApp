@@ -19,9 +19,11 @@ import com.kobakei.ratethisapp.RateThisApp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * Sample application of RateThisApp
@@ -33,8 +35,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Set custom criteria
+        // Set custom criteria (optional)
         RateThisApp.init(new RateThisApp.Config(3, 5));
+
+        // Set callback (optional)
+        RateThisApp.setCallback(new RateThisApp.Callback() {
+            @Override
+            public void onYesClicked() {
+                Toast.makeText(MainActivity.this, "Yes event", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNoClicked() {
+                Toast.makeText(MainActivity.this, "No event", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelClicked() {
+                Toast.makeText(MainActivity.this, "Cancel event", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         /*
         // Set custom title and message
