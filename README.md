@@ -58,15 +58,38 @@ config.setMessage(R.string.my_own_message);
 RateThisApp.init(config);
 ```
 
+### Callback
+
+You can receive yes/no/cancel button click events.
+
+```java
+RateThisApp.setCallback(new RateThisApp.Callback() {
+    @Override
+    public void onYesClicked() {
+        Toast.makeText(MainActivity.this, "Yes event", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNoClicked() {
+        Toast.makeText(MainActivity.this, "No event", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCancelClicked() {
+        Toast.makeText(MainActivity.this, "Cancel event", Toast.LENGTH_SHORT).show();
+    }
+});
+```
+
 ## Contribute this project
 
 If you want to contribute this project, please send pull request.
-In present, I need contributors who can translate resources from English/Japanese into Spanish, Chinese and other languages.
+In present, I need contributors who can translate resources from English/Japanese into other languages.
 
 ## License
 
 ```
-Copyright 2013-2015 Keisuke Kobayashi
+Copyright 2013-2016 Keisuke Kobayashi
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
