@@ -1,6 +1,7 @@
 Android-RateThisApp
 ===================
 
+[![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.kobakei/ratethisapp/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.kobakei/ratethisapp)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--RateThisApp-green.svg?style=true)](https://android-arsenal.com/details/1/2893)
 
 Android-RateThisApp is an library to show "Rate this app" dialog.
@@ -20,7 +21,7 @@ and show a dialog to engage users to rate the app in Google Play.
 
 ```
 dependencies {
-    compile 'com.kobakei:ratethisapp:0.0.4'
+    compile 'com.kobakei:ratethisapp:0.0.5'
 }
 ```
 
