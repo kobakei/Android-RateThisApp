@@ -187,6 +187,7 @@ public class RateThisApp {
         Editor editor = pref.edit();
         editor.putBoolean(KEY_OPT_OUT, optOut);
         editor.commit();
+        mOptOut = optOut;
     }
 
     /**

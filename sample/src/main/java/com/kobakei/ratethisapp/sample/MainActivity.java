@@ -18,7 +18,7 @@ package com.kobakei.ratethisapp.sample;
 import com.kobakei.ratethisapp.RateThisApp;
 
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +26,7 @@ import android.widget.Button;
 /**
  * Sample application of RateThisApp
  */
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
