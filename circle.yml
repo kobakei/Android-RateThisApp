@@ -1,0 +1,12 @@
+machine:
+  java:
+    version: oraclejdk8
+  environment:
+    JAVA_OPTS: "-Xms256m -Xmx512m"
+    ADB_INSTALL_TIMEOUT: 100
+
+dependencies:
+  pre:
+    # CircleCI docs says that these components are preinstalled
+    # but they may be not found.
+    - echo y | android update sdk --no-ui --all --filter "platform-tools,build-tools-23.0.1,extra-android-support,extra-android-m2repository"
