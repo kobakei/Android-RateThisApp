@@ -1,14 +1,4 @@
 apply plugin: "com.android.library"
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:1.5.0"
-    }
-}
-
 apply plugin: 'maven'
 
 android {
