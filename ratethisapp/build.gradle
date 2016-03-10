@@ -1,5 +1,5 @@
 apply plugin: "com.android.library"
-apply plugin: 'maven'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 23
@@ -23,4 +23,11 @@ dependencies {
     testCompile "org.robolectric:robolectric:3.0"
 }
 
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+publish {
+    userOrg = 'kobakei'
+    groupId = 'com.kobakei'
+    artifactId = 'ratethisapp'
+    publishVersion = "0.0.8"
+    desc = 'Android library to show "Rate this app" dialog'
+    website = 'https://github.com/kobakei/Android-RateThisApp'
+}
