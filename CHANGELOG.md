@@ -1,19 +1,12 @@
 # Change Log
 
-## 0.0.9 (2016/03/10)
+## 1.0.0 (2016/3/11)
 
-- Add pt translation
-- Now project is uploaded through Bintray
-
-## 0.0.6 (2016/03/10)
-
-- Enable to set dialog theme
-
-## 0.0.5 (2016/03/09)
-
-- Add ptBR translation
-
-## 0.0.4 (2016/03/09)
-
-- Support callback
-- Fix: opt out flag may not be set
+- New feature
+  - Enable to set dialog theme
+  - Add pt & pt-rBR translation
+  - Support callback
+- Fix
+  - opt out flag may not be set
+- From this version, artifacts are published on bintray jcenter.
+  - NOTICE: Group ID has been changed form `com.kobakei` to `io.github.kobakei`.
