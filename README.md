@@ -64,8 +64,6 @@ RateThisApp.init(config);
 
 ### Callback
 
-You can receive yes/no/cancel button click events.
-
 ```java
 RateThisApp.setCallback(new RateThisApp.Callback() {
     @Override
