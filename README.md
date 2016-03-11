@@ -22,7 +22,7 @@ and show a dialog to engage users to rate the app in Google Play.
 
 ```
 dependencies {
-    compile 'com.kobakei:ratethisapp:0.0.7'
+    compile 'com.kobakei:ratethisapp:0.0.4'
 }
 ```
 
@@ -58,29 +58,6 @@ RateThisApp.Config config = new RateThisApp.Config(3, 5);
 config.setTitle(R.string.my_own_title);
 config.setMessage(R.string.my_own_message);
 RateThisApp.init(config);
-```
-
-### Callback
-
-You can receive yes/no/cancel button click events.
-
-```java
-RateThisApp.setCallback(new RateThisApp.Callback() {
-    @Override
-    public void onYesClicked() {
-        Toast.makeText(MainActivity.this, "Yes event", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNoClicked() {
-        Toast.makeText(MainActivity.this, "No event", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onCancelClicked() {
-        Toast.makeText(MainActivity.this, "Cancel event", Toast.LENGTH_SHORT).show();
-    }
-});
 ```
 
 ## Contribute this project
