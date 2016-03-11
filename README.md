@@ -2,7 +2,7 @@ Android-RateThisApp
 ===================
 
 [![Build Status](https://circleci.com/gh/kobakei/Android-RateThisApp.svg?style=shield)](https://circleci.com/gh/kobakei/Android-RateThisApp/tree/master)
-[![MavenCentral](https://maven-badges.herokuapp.com/maven-central/com.kobakei/ratethisapp/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.kobakei/ratethisapp)
+[ ![Download](https://api.bintray.com/packages/kobakei/maven/ratethisapp/images/download.svg) ](https://bintray.com/kobakei/maven/ratethisapp/_latestVersion)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--RateThisApp-green.svg?style=true)](https://android-arsenal.com/details/1/2893)
 
 Android-RateThisApp is an library to show "Rate this app" dialog.
@@ -22,11 +22,13 @@ and show a dialog to engage users to rate the app in Google Play.
 
 ```
 dependencies {
-    compile 'com.kobakei:ratethisapp:0.0.4'
+    compile 'io.github.kobakei:ratethisapp:1.0.1'
 }
 ```
 
-### Implementation
+**NOTICE**: From 1.0.0, group ID has been changed from `com.kobakei` to `io.github.kobakei`.
+
+### Basic usage
 
 Call `RateThisApp.onStart(Context)` and `RateThisApp.showRateDialogIfNeeded(Context)` in your launcher activity's onStart() method.
 
@@ -58,6 +60,29 @@ RateThisApp.Config config = new RateThisApp.Config(3, 5);
 config.setTitle(R.string.my_own_title);
 config.setMessage(R.string.my_own_message);
 RateThisApp.init(config);
+```
+
+### Callback
+
+You can receive yes/no/cancel button click events.
+
+```java
+RateThisApp.setCallback(new RateThisApp.Callback() {
+    @Override
+    public void onYesClicked() {
+        Toast.makeText(MainActivity.this, "Yes event", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNoClicked() {
+        Toast.makeText(MainActivity.this, "No event", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCancelClicked() {
+        Toast.makeText(MainActivity.this, "Cancel event", Toast.LENGTH_SHORT).show();
+    }
+});
 ```
 
 ## Contribute this project
