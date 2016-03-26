@@ -173,9 +173,12 @@ public class RateThisApp {
     private static void showRateDialog(final Context context, AlertDialog.Builder builder) {
         int titleId = sConfig.mTitleId != 0 ? sConfig.mTitleId : R.string.rta_dialog_title;
         int messageId = sConfig.mMessageId != 0 ? sConfig.mMessageId : R.string.rta_dialog_message;
+        int CancelButtonID = sConfig.CancelButton != 0 ? sConfig.CancelButton : R.string.rta_dialog_cancel;
+        int ThanksButtonID = sConfig.ThanksButton != 0 ? sConfig.ThanksButton : R.string.rta_dialog_no;
+        int RateButtonID = sConfig.RateButton != 0 ? sConfig.RateButton : R.string.rta_dialog_message;
         builder.setTitle(titleId);
         builder.setMessage(messageId);
-        builder.setPositiveButton(R.string.rta_dialog_ok, new OnClickListener() {
+        builder.setPositiveButton(RateButtonID, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (sCallback != null) {
@@ -187,7 +190,7 @@ public class RateThisApp {
                 setOptOut(context, true);
             }
         });
-        builder.setNeutralButton(R.string.rta_dialog_cancel, new OnClickListener() {
+        builder.setNeutralButton(CancelButtonID, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (sCallback != null) {
@@ -196,7 +199,7 @@ public class RateThisApp {
                 clearSharedPreferences(context);
             }
         });
-        builder.setNegativeButton(R.string.rta_dialog_no, new OnClickListener() {
+        builder.setNegativeButton(ThanksButtonID, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (sCallback != null) {
@@ -270,6 +273,9 @@ public class RateThisApp {
         private int mCriteriaLaunchTimes;
         private int mTitleId = 0;
         private int mMessageId = 0;
+        private int RateButton = 0;
+        private int ThanksButton = 0;
+        private int CancelButton = 0;
 
         /**
          * Constructor with default criteria.
@@ -302,6 +308,30 @@ public class RateThisApp {
          */
         public void setMessage(int stringId) {
             this.mMessageId = stringId;
+        }
+        
+        /**
+         * Set message string ID.
+         * @param stringId
+         */
+        public void setRateButton(int stringId) {
+            this.RateButton = stringId;
+        }
+        
+        /**
+         * Set message string ID.
+         * @param stringId
+         */
+        public void setThanksButton(int stringId) {
+            this.ThanksButton = stringId;
+        }
+        
+        /**
+         * Set message string ID.
+         * @param stringId
+         */
+        public void setCancelButton(int stringId) {
+            this.CancelButton = stringId;
         }
     }
 
