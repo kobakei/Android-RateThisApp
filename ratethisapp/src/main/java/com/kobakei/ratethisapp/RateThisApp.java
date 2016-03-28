@@ -173,9 +173,9 @@ public class RateThisApp {
     private static void showRateDialog(final Context context, AlertDialog.Builder builder) {
         int titleId = sConfig.mTitleId != 0 ? sConfig.mTitleId : R.string.rta_dialog_title;
         int messageId = sConfig.mMessageId != 0 ? sConfig.mMessageId : R.string.rta_dialog_message;
-        int cancelButtonID = sConfig.cancelButton != 0 ? sConfig.cancelButton : R.string.rta_dialog_cancel;
-        int thanksButtonID = sConfig.thanksButton != 0 ? sConfig.thanksButton : R.string.rta_dialog_no;
-        int rateButtonID = sConfig.rateButton != 0 ? sConfig.rateButton : R.string.rta_dialog_message;
+        int cancelButtonID = sConfig.mCancelButton != 0 ? sConfig.mCancelButton : R.string.rta_dialog_cancel;
+        int thanksButtonID = sConfig.mThanksButton != 0 ? sConfig.mThanksButton : R.string.rta_dialog_no;
+        int rateButtonID = sConfig.mRateButton != 0 ? sConfig.mRateButton : R.string.rta_dialog_message;
         builder.setTitle(titleId);
         builder.setMessage(messageId);
         builder.setPositiveButton(rateButtonID, new OnClickListener() {
@@ -273,9 +273,9 @@ public class RateThisApp {
         private int mCriteriaLaunchTimes;
         private int mTitleId = 0;
         private int mMessageId = 0;
-        private int rateButton = 0;
-        private int thanksButton = 0;
-        private int cancelButton = 0;
+        private int mRateButton = 0;
+        private int mThanksButton = 0;
+        private int mCancelButton = 0;
 
         /**
          * Constructor with default criteria.
@@ -315,7 +315,7 @@ public class RateThisApp {
          * @param stringId
          */
         public void setRateButton(int stringId) {
-            this.rateButton = stringId;
+            this.mRateButton = stringId;
         }
         
         /**
@@ -323,7 +323,7 @@ public class RateThisApp {
          * @param stringId
          */
         public void setThanksButton(int stringId) {
-            this.thanksButton = stringId;
+            this.mThanksButton = stringId;
         }
         
         /**
@@ -331,7 +331,7 @@ public class RateThisApp {
          * @param stringId
          */
         public void setCancelButton(int stringId) {
-            this.cancelButton = stringId;
+            this.mCancelButton = stringId;
         }
     }
 
