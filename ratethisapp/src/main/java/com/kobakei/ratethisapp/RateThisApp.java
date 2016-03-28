@@ -175,7 +175,7 @@ public class RateThisApp {
         int messageId = sConfig.mMessageId != 0 ? sConfig.mMessageId : R.string.rta_dialog_message;
         int cancelButtonID = sConfig.mCancelButton != 0 ? sConfig.mCancelButton : R.string.rta_dialog_cancel;
         int thanksButtonID = sConfig.mThanksButton != 0 ? sConfig.mThanksButton : R.string.rta_dialog_no;
-        int rateButtonID = sConfig.mRateButton != 0 ? sConfig.mRateButton : R.string.rta_dialog_message;
+        int rateButtonID = sConfig.mRateButton != 0 ? sConfig.mRateButton : R.string.rta_dialog_ok;
         builder.setTitle(titleId);
         builder.setMessage(messageId);
         builder.setPositiveButton(rateButtonID, new OnClickListener() {
