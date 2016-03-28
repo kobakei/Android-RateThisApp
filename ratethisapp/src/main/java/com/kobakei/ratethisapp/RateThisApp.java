@@ -311,7 +311,7 @@ public class RateThisApp {
         }
         
         /**
-         * Set message string ID.
+         * Set rate now string ID.
          * @param stringId
          */
         public void setRateButton(int stringId) {
@@ -319,7 +319,7 @@ public class RateThisApp {
         }
         
         /**
-         * Set message string ID.
+         * Set no thanks string ID.
          * @param stringId
          */
         public void setThanksButton(int stringId) {
@@ -327,7 +327,7 @@ public class RateThisApp {
         }
         
         /**
-         * Set message string ID.
+         * Set cancel string ID.
          * @param stringId
          */
         public void setCancelButton(int stringId) {
