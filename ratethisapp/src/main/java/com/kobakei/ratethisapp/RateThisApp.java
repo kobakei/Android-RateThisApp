@@ -170,6 +170,14 @@ public class RateThisApp {
         showRateDialog(context, builder);
     }
 
+    /**
+     * Stop showing the rate dialog
+     * @param context
+     */
+    public static void stopRateDialog(final Context context){
+        setOptOut(context, true);
+    }
+
     private static void showRateDialog(final Context context, AlertDialog.Builder builder) {
         int titleId = sConfig.mTitleId != 0 ? sConfig.mTitleId : R.string.rta_dialog_title;
         int messageId = sConfig.mMessageId != 0 ? sConfig.mMessageId : R.string.rta_dialog_message;
