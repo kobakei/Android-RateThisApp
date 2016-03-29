@@ -21,4 +21,9 @@
         android:text="Show dialog with custom style"
         android:id="@+id/button2" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop rate dialog"
+        android:id="@+id/button3" />
 </LinearLayout>
