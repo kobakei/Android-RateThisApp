@@ -22,7 +22,7 @@ and show a dialog to engage users to rate the app in Google Play.
 
 ```
 dependencies {
-    compile 'io.github.kobakei:ratethisapp:1.0.1'
+    compile 'io.github.kobakei:ratethisapp:1.0.2'
 }
 ```
 

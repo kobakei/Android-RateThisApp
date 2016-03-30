@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.0.2 (2016/03/30)
+
+- New feature
+  - Add uk translation
+  - Enable to opt out dialog by `stopRateDialog`
+  - Enable to change button texts
+
 ## 1.0.1 (2016/03/12)
 
 - New feature
