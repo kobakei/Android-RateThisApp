@@ -81,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 RateThisApp.showRateDialog(MainActivity.this, R.style.MyAlertDialogStyle2);
             }
         });
+
+        Button button3 = (Button) findViewById(R.id.button3);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RateThisApp.stopRateDialog(MainActivity.this);
+            }
+        });
     }
 
     @Override

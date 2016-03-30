@@ -62,6 +62,14 @@ config.setMessage(R.string.my_own_message);
 RateThisApp.init(config);
 ```
 
+### Method
+
+If you want to stop showing the rate dialog, use this method in your code.
+
+```java
+RateThisApp.stopRateDialog(this);
+```
+
 ### Callback
 
 You can receive yes/no/cancel button click events.
