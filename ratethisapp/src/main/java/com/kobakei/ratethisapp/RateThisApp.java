@@ -234,6 +234,9 @@ public class RateThisApp {
         builder.setOnCancelListener(new OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
+                if (sCallback != null) {
+                    sCallback.onCancelClicked();
+                }
                 clearSharedPreferences(context);
             }
         });
