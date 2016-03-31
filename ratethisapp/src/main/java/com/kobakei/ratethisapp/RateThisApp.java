@@ -107,10 +107,10 @@ public class RateThisApp {
         mCounterVersion = pref.getInt(KEY_APP_COUNTER_VERSION, -1);
         mReviewedVersion = pref.getInt(KEY_APP_VERSION, -1);
 
-        if (!mOptOut && sConfig.mPromptForNewVersion && mReviewedVersion < BuildConfig.VERSION_CODE && mCounterVersion < BuildConfig.VERSION_CODE){
+        if (!mOptOut && sConfig.mPromptForNewVersion && mReviewedVersion < sConfig.mCurrentAppVersion && mCounterVersion < sConfig.mCurrentAppVersion){
             clearSharedPreferences(context);
-        } else if (mCounterVersion != BuildConfig.VERSION_CODE){ //let's just update the counter version just in case we need it later
-            pref.edit().putInt(KEY_APP_COUNTER_VERSION, BuildConfig.VERSION_CODE).commit();
+        } else if (mCounterVersion != sConfig.mCurrentAppVersion){ //let's just update the counter version just in case we need it later
+            pref.edit().putInt(KEY_APP_COUNTER_VERSION, sConfig.mCurrentAppVersion).commit();
         }
 
         printStatus(context);
@@ -250,8 +250,13 @@ public class RateThisApp {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         editor.remove(KEY_INSTALL_DATE);
+        mInstallDate = new Date();
         editor.remove(KEY_LAUNCH_TIMES);
-        editor.putInt(KEY_APP_COUNTER_VERSION, BuildConfig.VERSION_CODE);
+        mLaunchTimes = 0;
+        editor.putInt(KEY_APP_COUNTER_VERSION, sConfig.mCurrentAppVersion);
+        mCounterVersion = sConfig.mCurrentAppVersion;
+        editor.putBoolean(KEY_ALREADY_REVIEWED, false);
+        mAlreadyReviewed = false;
         editor.commit();
     }
 
@@ -278,6 +283,7 @@ public class RateThisApp {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         editor.putBoolean(KEY_ALREADY_REVIEWED, alreadyReviewed);
+        editor.putInt(KEY_APP_VERSION, sConfig.mCurrentAppVersion);
         editor.commit();
         mAlreadyReviewed = alreadyReviewed;
     }
@@ -320,6 +326,7 @@ public class RateThisApp {
         private int mCancelButton = 0;
 
         private boolean mPromptForNewVersion = false;
+        private int mCurrentAppVersion = -1;
         /**
          * Constructor with default criteria.
          */
@@ -380,9 +387,11 @@ public class RateThisApp {
         /**
          * Set promptForNewVersion if user rated
          * @param promptForNewVersion
+         * @param currentAppVersion
          */
-        public void setPromptForNewVersion(boolean promptForNewVersion){
+        public void setPromptForNewVersion(boolean promptForNewVersion, int currentAppVersion){
             this.mPromptForNewVersion = promptForNewVersion;
+            this.mCurrentAppVersion = currentAppVersion;
         }
     }
 
