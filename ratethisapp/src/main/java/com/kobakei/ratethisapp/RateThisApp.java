@@ -42,10 +42,16 @@ public class RateThisApp {
     private static final String KEY_INSTALL_DATE = "rta_install_date";
     private static final String KEY_LAUNCH_TIMES = "rta_launch_times";
     private static final String KEY_OPT_OUT = "rta_opt_out";
+    private static final String KEY_ALREADY_REVIEWED = "rta_user_reviewed";
+    private static final String KEY_APP_COUNTER_VERSION = "rta_counter_version";
+    private static final String KEY_APP_VERSION = "rta_reviewed_version";
 
     private static Date mInstallDate = new Date();
     private static int mLaunchTimes = 0;
     private static boolean mOptOut = false;
+    private static boolean mAlreadyReviewed = false;
+    private static int mCounterVersion = -1;
+    private static int mReviewedVersion = -1;
 
     private static Config sConfig = new Config();
     private static Callback sCallback = null;
@@ -97,6 +103,15 @@ public class RateThisApp {
         mInstallDate = new Date(pref.getLong(KEY_INSTALL_DATE, 0));
         mLaunchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
         mOptOut = pref.getBoolean(KEY_OPT_OUT, false);
+        mAlreadyReviewed = pref.getBoolean(KEY_ALREADY_REVIEWED, false);
+        mCounterVersion = pref.getInt(KEY_APP_COUNTER_VERSION, -1);
+        mReviewedVersion = pref.getInt(KEY_APP_VERSION, -1);
+
+        if (!mOptOut && sConfig.mPromptForNewVersion && mReviewedVersion < sConfig.mCurrentAppVersion && mCounterVersion < sConfig.mCurrentAppVersion){
+            clearSharedPreferences(context);
+        } else if (mCounterVersion != sConfig.mCurrentAppVersion){ //let's just update the counter version just in case we need it later
+            pref.edit().putInt(KEY_APP_COUNTER_VERSION, sConfig.mCurrentAppVersion).commit();
+        }
 
         printStatus(context);
     }
@@ -137,7 +152,7 @@ public class RateThisApp {
      * @return
      */
     public static boolean shouldShowRateDialog() {
-        if (mOptOut) {
+        if (mOptOut || mAlreadyReviewed) {
             return false;
         } else {
             if (mLaunchTimes >= sConfig.mCriteriaLaunchTimes) {
@@ -195,7 +210,7 @@ public class RateThisApp {
                 String appPackage = context.getPackageName();
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackage));
                 context.startActivity(intent);
-                setOptOut(context, true);
+                setAlreadyReviewed(context, true);
             }
         });
         builder.setNeutralButton(cancelButtonID, new OnClickListener() {
@@ -219,6 +234,9 @@ public class RateThisApp {
         builder.setOnCancelListener(new OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
+                if (sCallback != null) {
+                    sCallback.onCancelClicked();
+                }
                 clearSharedPreferences(context);
             }
         });
@@ -227,14 +245,21 @@ public class RateThisApp {
 
     /**
      * Clear data in shared preferences.<br>
-     * This API is called when the rate dialog is approved or canceled.
+     * This API is called when the rate dialog is approved, canceled. or with new app version if the
+     * prompt for newer version flag is set in the configuration
      * @param context
      */
     private static void clearSharedPreferences(Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         editor.remove(KEY_INSTALL_DATE);
+        mInstallDate = new Date();
         editor.remove(KEY_LAUNCH_TIMES);
+        mLaunchTimes = 0;
+        editor.putInt(KEY_APP_COUNTER_VERSION, sConfig.mCurrentAppVersion);
+        mCounterVersion = sConfig.mCurrentAppVersion;
+        editor.putBoolean(KEY_ALREADY_REVIEWED, false);
+        mAlreadyReviewed = false;
         editor.commit();
     }
 
@@ -252,15 +277,33 @@ public class RateThisApp {
     }
 
     /**
+     * Set already reviewed flag. If it is true, the rate dialog will not be shown unless the config
+     * is set to ask again for newer versions
+     * @param context
+     * @param alreadyReviewed
+     */
+    private static void setAlreadyReviewed(final Context context, boolean alreadyReviewed){
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        Editor editor = pref.edit();
+        editor.putBoolean(KEY_ALREADY_REVIEWED, alreadyReviewed);
+        editor.putInt(KEY_APP_VERSION, sConfig.mCurrentAppVersion);
+        editor.commit();
+        mAlreadyReviewed = alreadyReviewed;
+    }
+
+    /**
      * Print values in SharedPreferences (used for debug)
      * @param context
      */
     private static void printStatus(final Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         log("*** RateThisApp Status ***");
+        log("Counter App version" + pref.getInt(KEY_APP_COUNTER_VERSION, -1));
         log("Install Date: " + new Date(pref.getLong(KEY_INSTALL_DATE, 0)));
         log("Launch Times: " + pref.getInt(KEY_LAUNCH_TIMES, 0));
         log("Opt out: " + pref.getBoolean(KEY_OPT_OUT, false));
+        log("Already reviewed: " + pref.getBoolean(KEY_ALREADY_REVIEWED, false));
+        log("Reviewed version: " + pref.getInt(KEY_APP_VERSION, -1));
     }
 
     /**
@@ -285,6 +328,8 @@ public class RateThisApp {
         private int mThanksButton = 0;
         private int mCancelButton = 0;
 
+        private boolean mPromptForNewVersion = false;
+        private int mCurrentAppVersion = -1;
         /**
          * Constructor with default criteria.
          */
@@ -340,6 +385,16 @@ public class RateThisApp {
          */
         public void setCancelButton(int stringId) {
             this.mCancelButton = stringId;
+        }
+
+        /**
+         * Set promptForNewVersion if user rated
+         * @param promptForNewVersion
+         * @param currentAppVersion
+         */
+        public void setPromptForNewVersion(boolean promptForNewVersion, int currentAppVersion){
+            this.mPromptForNewVersion = promptForNewVersion;
+            this.mCurrentAppVersion = currentAppVersion;
         }
     }
 
