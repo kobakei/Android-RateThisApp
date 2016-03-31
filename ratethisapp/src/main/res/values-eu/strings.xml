@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Aplikazioa baloratu</string>
+    <string name="rta_dialog_message">Aplikazioa gustatzen bazaizu, aipamenen bat idatz zenezake? ez duzu minutu bat baino gehiago beharko. Eskerrik asko zure babesagatik!</string>
+    <string name="rta_dialog_ok">Baloratu</string>
+    <string name="rta_dialog_cancel">Beranduago</string>
+    <string name="rta_dialog_no">Ez, eskerrik asko</string>
+
+</resources>
