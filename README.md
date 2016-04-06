@@ -56,9 +56,12 @@ If you want to use your own criteria, please call `RateThisApp.init(Configuratio
 ```java
 // Custom criteria: 3 days and 5 launches
 RateThisApp.Config config = new RateThisApp.Config(3, 5);
-// Custom title and message
+// Custom title ,message and buttons names
 config.setTitle(R.string.my_own_title);
 config.setMessage(R.string.my_own_message);
+config.setRateButton(R.string.my_own_rate);
+config.setThanksButton(R.string.my_own_thanks);
+config.setCancelButton(R.string.my_own_cancel);
 RateThisApp.init(config);
 ```
 
