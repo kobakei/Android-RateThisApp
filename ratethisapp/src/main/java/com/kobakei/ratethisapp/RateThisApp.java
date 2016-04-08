@@ -25,6 +25,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -85,9 +87,16 @@ public class RateThisApp {
         Editor editor = pref.edit();
         // If it is the first launch, save the date in shared preference.
         if (pref.getLong(KEY_INSTALL_DATE, 0) == 0L) {
-            Date now = new Date();
-            editor.putLong(KEY_INSTALL_DATE, now.getTime());
-            log("First install: " + now.toString());
+            Date installDate;
+            PackageManager packMan = context.getPackageManager();
+            try {
+                PackageInfo pkgInfo = packMan.getPackageInfo(context.getPackageName(), 0);
+                installDate = new Date(pkgInfo.firstInstallTime);
+            } catch (PackageManager.NameNotFoundException e) {
+                installDate = new Date();
+            }
+            editor.putLong(KEY_INSTALL_DATE, installDate.getTime());
+            log("First install: " + installDate.toString());
         }
         // Increment launch times
         int launchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
