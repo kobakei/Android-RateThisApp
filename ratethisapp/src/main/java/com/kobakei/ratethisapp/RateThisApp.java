@@ -15,8 +15,6 @@
  */
 package com.kobakei.ratethisapp;
 
-import java.util.Date;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -24,9 +22,13 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+
+import java.util.Date;
 
 /**
  * RateThisApp<br>
@@ -39,7 +41,7 @@ public class RateThisApp {
     private static final String TAG = RateThisApp.class.getSimpleName();
 
     private static final String PREF_NAME = "RateThisApp";
-    private static final String KEY_INSTALL_DATE = "rta_install_date";
+    private static final String KEY_OLDEST_SEEN_DATE = "rta_oldest_date";
     private static final String KEY_LAUNCH_TIMES = "rta_launch_times";
     private static final String KEY_OPT_OUT = "rta_opt_out";
 
@@ -81,10 +83,10 @@ public class RateThisApp {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         // If it is the first launch, save the date in shared preference.
-        if (pref.getLong(KEY_INSTALL_DATE, 0) == 0L) {
+        if (pref.getLong(KEY_OLDEST_SEEN_DATE, 0) == 0L) {
             Date now = new Date();
-            editor.putLong(KEY_INSTALL_DATE, now.getTime());
-            log("First install: " + now.toString());
+            editor.putLong(KEY_OLDEST_SEEN_DATE, now.getTime());
+            log("Oldest seen date: " + now.toString());
         }
         // Increment launch times
         int launchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
@@ -94,7 +96,16 @@ public class RateThisApp {
 
         editor.commit();
 
-        mInstallDate = new Date(pref.getLong(KEY_INSTALL_DATE, 0));
+        PackageManager packMan = context.getPackageManager();
+        try {
+            PackageInfo pkgInfo = packMan.getPackageInfo(context.getPackageName(), 0);
+            mInstallDate = new Date(pkgInfo.firstInstallTime);
+            log("First install: " + mInstallDate);
+        } catch (PackageManager.NameNotFoundException e) {
+            mInstallDate = new Date(pref.getLong(KEY_OLDEST_SEEN_DATE, 0));
+            log("First install date unavailable");
+        }
+
         mLaunchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
         mOptOut = pref.getBoolean(KEY_OPT_OUT, false);
 
@@ -233,7 +244,7 @@ public class RateThisApp {
     private static void clearSharedPreferences(Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
-        editor.remove(KEY_INSTALL_DATE);
+        editor.remove(KEY_OLDEST_SEEN_DATE);
         editor.remove(KEY_LAUNCH_TIMES);
         editor.commit();
     }
@@ -258,7 +269,7 @@ public class RateThisApp {
     private static void printStatus(final Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         log("*** RateThisApp Status ***");
-        log("Install Date: " + new Date(pref.getLong(KEY_INSTALL_DATE, 0)));
+        log("Oldest seen Date: " + new Date(pref.getLong(KEY_OLDEST_SEEN_DATE, 0)));
         log("Launch Times: " + pref.getInt(KEY_LAUNCH_TIMES, 0));
         log("Opt out: " + pref.getBoolean(KEY_OPT_OUT, false));
     }
