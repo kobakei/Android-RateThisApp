@@ -15,6 +15,7 @@
  */
 package com.kobakei.ratethisapp;
 
+import java.lang.ref.WeakReference;
 import java.util.Date;
 
 import android.content.Context;
@@ -49,6 +50,8 @@ public class RateThisApp {
 
     private static Config sConfig = new Config();
     private static Callback sCallback = null;
+    // Weak ref to avoid leaking the context
+    private static WeakReference<AlertDialog> sDialogRef = null;
 
     /**
      * If true, print LogCat
@@ -179,6 +182,11 @@ public class RateThisApp {
     }
 
     private static void showRateDialog(final Context context, AlertDialog.Builder builder) {
+        if (sDialogRef != null && sDialogRef.get() != null) {
+            // Dialog is already present
+            return;
+        }
+
         int titleId = sConfig.mTitleId != 0 ? sConfig.mTitleId : R.string.rta_dialog_title;
         int messageId = sConfig.mMessageId != 0 ? sConfig.mMessageId : R.string.rta_dialog_message;
         int cancelButtonID = sConfig.mCancelButton != 0 ? sConfig.mCancelButton : R.string.rta_dialog_cancel;
@@ -222,7 +230,13 @@ public class RateThisApp {
                 clearSharedPreferences(context);
             }
         });
-        builder.create().show();
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                sDialogRef.clear();
+            }
+        });
+        sDialogRef = new WeakReference<>(builder.show());
     }
 
     /**
