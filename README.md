@@ -67,7 +67,7 @@ config.setCancelButton(R.string.my_own_cancel);
 RateThisApp.init(config);
 ```
 
-### Method
+### Opt out from your code
 
 If you want to stop showing the rate dialog, use this method in your code.
 
