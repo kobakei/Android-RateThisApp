@@ -22,11 +22,13 @@ and show a dialog to engage users to rate the app in Google Play.
 
 ```groovy
 dependencies {
-    compile 'io.github.kobakei:ratethisapp:1.0.0'
+    compile 'io.github.kobakei:ratethisapp:x.y.z'
 }
 ```
 
-NOTICE: From 1.0.0, group ID has been changed from `com.kobakei` to `io.github.kobakei`.
+x.y.z is [ ![Download](https://api.bintray.com/packages/kobakei/maven/ratethisapp/images/download.svg) ](https://bintray.com/kobakei/maven/ratethisapp/_latestVersion)
+
+**NOTICE**: From 1.0.0, group ID has been changed from `com.kobakei` to `io.github.kobakei`.
 
 ### Basic usage
 
@@ -56,13 +58,26 @@ If you want to use your own criteria, please call `RateThisApp.init(Configuratio
 ```java
 // Custom criteria: 3 days and 5 launches
 RateThisApp.Config config = new RateThisApp.Config(3, 5);
-// Custom title and message
+// Custom title ,message and buttons names
 config.setTitle(R.string.my_own_title);
 config.setMessage(R.string.my_own_message);
+config.setRateButton(R.string.my_own_rate);
+config.setThanksButton(R.string.my_own_thanks);
+config.setCancelButton(R.string.my_own_cancel);
 RateThisApp.init(config);
 ```
 
+### Method
+
+If you want to stop showing the rate dialog, use this method in your code.
+
+```java
+RateThisApp.stopRateDialog(this);
+```
+
 ### Callback
+
+You can receive yes/no/cancel button click events.
 
 ```java
 RateThisApp.setCallback(new RateThisApp.Callback() {
