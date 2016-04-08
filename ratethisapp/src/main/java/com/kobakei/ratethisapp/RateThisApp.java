@@ -29,6 +29,8 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
+import com.kobakei.ratethisapp.enums.RateConditionsEnum;
+
 /**
  * RateThisApp<br>
  * A library to show the app rate dialog
@@ -143,14 +145,16 @@ public class RateThisApp {
         if (mOptOut) {
             return false;
         } else {
-            if (mLaunchTimes >= sConfig.mCriteriaLaunchTimes) {
-                return true;
-            }
+            boolean launchTimesFulfilled = (mLaunchTimes >= sConfig.mCriteriaLaunchTimes);
+
             long threshold = sConfig.mCriteriaInstallDays * 24 * 60 * 60 * 1000L;	// msec
-            if (new Date().getTime() - mInstallDate.getTime() >= threshold) {
-                return true;
+            boolean installThresholdFulfilled = new Date().getTime() - mInstallDate.getTime() >= threshold;
+
+            if (sConfig.mAndCondition){
+                return launchTimesFulfilled && installThresholdFulfilled;
+            } else {
+                return launchTimesFulfilled || installThresholdFulfilled;
             }
-            return false;
         }
     }
 
@@ -298,12 +302,18 @@ public class RateThisApp {
         private int mRateButton = 0;
         private int mThanksButton = 0;
         private int mCancelButton = 0;
+        private boolean mAndCondition = false;
 
         /**
          * Constructor with default criteria.
          */
         public Config() {
             this(7, 10);
+        }
+
+        public Config(RateConditionsEnum rateConditionsJoin) {
+            this();
+            this.mAndCondition = rateConditionsJoin == RateConditionsEnum.AND;
         }
 
         /**
@@ -314,6 +324,18 @@ public class RateThisApp {
         public Config(int criteriaInstallDays, int criteriaLaunchTimes) {
             this.mCriteriaInstallDays = criteriaInstallDays;
             this.mCriteriaLaunchTimes = criteriaLaunchTimes;
+        }
+
+        /**
+         * Constructor.
+         * @param criteriaInstallDays
+         * @param criteriaLaunchTimes
+         * @param rateConditionsJoin
+         */
+        public Config(int criteriaInstallDays, int criteriaLaunchTimes, RateConditionsEnum rateConditionsJoin) {
+            this.mCriteriaInstallDays = criteriaInstallDays;
+            this.mCriteriaLaunchTimes = criteriaLaunchTimes;
+            this.mAndCondition = rateConditionsJoin == RateConditionsEnum.AND;
         }
 
         /**
@@ -331,7 +353,7 @@ public class RateThisApp {
         public void setMessage(int stringId) {
             this.mMessageId = stringId;
         }
-        
+
         /**
          * Set rate now string ID.
          * @param stringId
@@ -339,7 +361,7 @@ public class RateThisApp {
         public void setRateButton(int stringId) {
             this.mRateButton = stringId;
         }
-        
+
         /**
          * Set no thanks string ID.
          * @param stringId
@@ -347,7 +369,7 @@ public class RateThisApp {
         public void setThanksButton(int stringId) {
             this.mThanksButton = stringId;
         }
-        
+
         /**
          * Set cancel string ID.
          * @param stringId
@@ -355,6 +377,16 @@ public class RateThisApp {
         public void setCancelButton(int stringId) {
             this.mCancelButton = stringId;
         }
+
+        /**
+         * Set condition to And
+         */
+        public void setOrCondition() { this.mAndCondition = false; }
+
+        /**
+         * Set condition to Or
+         */
+        public void setAndCondition(){ this.mAndCondition = true; }
     }
 
     public interface Callback {
