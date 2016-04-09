@@ -25,6 +25,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -43,10 +45,12 @@ public class RateThisApp {
     private static final String KEY_INSTALL_DATE = "rta_install_date";
     private static final String KEY_LAUNCH_TIMES = "rta_launch_times";
     private static final String KEY_OPT_OUT = "rta_opt_out";
+    private static final String KEY_ASK_LATER_DATE = "rta_ask_later_date";
 
     private static Date mInstallDate = new Date();
     private static int mLaunchTimes = 0;
     private static boolean mOptOut = false;
+    private static Date mAskLaterDate = new Date();
 
     private static Config sConfig = new Config();
     private static Callback sCallback = null;
@@ -85,9 +89,16 @@ public class RateThisApp {
         Editor editor = pref.edit();
         // If it is the first launch, save the date in shared preference.
         if (pref.getLong(KEY_INSTALL_DATE, 0) == 0L) {
-            Date now = new Date();
-            editor.putLong(KEY_INSTALL_DATE, now.getTime());
-            log("First install: " + now.toString());
+            Date installDate;
+            PackageManager packMan = context.getPackageManager();
+            try {
+                PackageInfo pkgInfo = packMan.getPackageInfo(context.getPackageName(), 0);
+                installDate = new Date(pkgInfo.firstInstallTime);
+            } catch (PackageManager.NameNotFoundException e) {
+                installDate = new Date();
+            }
+            editor.putLong(KEY_INSTALL_DATE, installDate.getTime());
+            log("First install: " + installDate.toString());
         }
         // Increment launch times
         int launchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
@@ -100,6 +111,7 @@ public class RateThisApp {
         mInstallDate = new Date(pref.getLong(KEY_INSTALL_DATE, 0));
         mLaunchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
         mOptOut = pref.getBoolean(KEY_OPT_OUT, false);
+        mAskLaterDate = new Date(pref.getLong(KEY_ASK_LATER_DATE, 0));
 
         printStatus(context);
     }
@@ -147,7 +159,8 @@ public class RateThisApp {
                 return true;
             }
             long threshold = sConfig.mCriteriaInstallDays * 24 * 60 * 60 * 1000L;	// msec
-            if (new Date().getTime() - mInstallDate.getTime() >= threshold) {
+            if (new Date().getTime() - mInstallDate.getTime() >= threshold &&
+                new Date().getTime() - mAskLaterDate.getTime() >= threshold) {
                 return true;
             }
             return false;
@@ -213,6 +226,7 @@ public class RateThisApp {
                     sCallback.onCancelClicked();
                 }
                 clearSharedPreferences(context);
+                storeAskLaterDate(context);
             }
         });
         builder.setNegativeButton(thanksButtonID, new OnClickListener() {
@@ -228,6 +242,7 @@ public class RateThisApp {
             @Override
             public void onCancel(DialogInterface dialog) {
                 clearSharedPreferences(context);
+                storeAskLaterDate(context);
             }
         });
         builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -263,6 +278,17 @@ public class RateThisApp {
         editor.putBoolean(KEY_OPT_OUT, optOut);
         editor.commit();
         mOptOut = optOut;
+    }
+
+    /**
+     * Store the date the user asked for being asked again later.
+     * @param context
+     */
+    private static void storeAskLaterDate(final Context context) {
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        Editor editor = pref.edit();
+        editor.putLong(KEY_ASK_LATER_DATE, System.currentTimeMillis());
+        editor.commit();
     }
 
     /**
