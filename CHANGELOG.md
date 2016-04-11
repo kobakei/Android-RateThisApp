@@ -1,5 +1,15 @@
 # Change Log
 
+## 1.0.3 (2016/04/11)
+
+- New feature
+  - Add eu translation
+- Improvement
+  - Use real install time from package manager
+- Fix 
+  - Cancel callback is not invoked on pressing back key or touching outside.
+  - Stacking of multiple rate dialogs
+
 ## 1.0.2 (2016/03/30)
 
 - New feature
