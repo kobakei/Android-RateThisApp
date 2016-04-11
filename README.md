@@ -61,9 +61,9 @@ RateThisApp.Config config = new RateThisApp.Config(3, 5);
 // Custom title ,message and buttons names
 config.setTitle(R.string.my_own_title);
 config.setMessage(R.string.my_own_message);
-config.setRateButton(R.string.my_own_rate);
-config.setThanksButton(R.string.my_own_thanks);
-config.setCancelButton(R.string.my_own_cancel);
+config.setYesButtonText(R.string.my_own_rate);
+config.setNoButtonText(R.string.my_own_thanks);
+config.setCancelButtonText(R.string.my_own_cancel);
 RateThisApp.init(config);
 ```
 
