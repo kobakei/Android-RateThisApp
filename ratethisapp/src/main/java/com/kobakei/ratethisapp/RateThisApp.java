@@ -28,6 +28,8 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 
@@ -89,16 +91,7 @@ public class RateThisApp {
         Editor editor = pref.edit();
         // If it is the first launch, save the date in shared preference.
         if (pref.getLong(KEY_INSTALL_DATE, 0) == 0L) {
-            Date installDate;
-            PackageManager packMan = context.getPackageManager();
-            try {
-                PackageInfo pkgInfo = packMan.getPackageInfo(context.getPackageName(), 0);
-                installDate = new Date(pkgInfo.firstInstallTime);
-            } catch (PackageManager.NameNotFoundException e) {
-                installDate = new Date();
-            }
-            editor.putLong(KEY_INSTALL_DATE, installDate.getTime());
-            log("First install: " + installDate.toString());
+            storeInstallDate(context, editor);
         }
         // Increment launch times
         int launchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
@@ -203,8 +196,8 @@ public class RateThisApp {
         int titleId = sConfig.mTitleId != 0 ? sConfig.mTitleId : R.string.rta_dialog_title;
         int messageId = sConfig.mMessageId != 0 ? sConfig.mMessageId : R.string.rta_dialog_message;
         int cancelButtonID = sConfig.mCancelButton != 0 ? sConfig.mCancelButton : R.string.rta_dialog_cancel;
-        int thanksButtonID = sConfig.mThanksButton != 0 ? sConfig.mThanksButton : R.string.rta_dialog_no;
-        int rateButtonID = sConfig.mRateButton != 0 ? sConfig.mRateButton : R.string.rta_dialog_ok;
+        int thanksButtonID = sConfig.mNoButtonId != 0 ? sConfig.mNoButtonId : R.string.rta_dialog_no;
+        int rateButtonID = sConfig.mYesButtonId != 0 ? sConfig.mYesButtonId : R.string.rta_dialog_ok;
         builder.setTitle(titleId);
         builder.setMessage(messageId);
         builder.setPositiveButton(rateButtonID, new OnClickListener() {
@@ -241,6 +234,9 @@ public class RateThisApp {
         builder.setOnCancelListener(new OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
+                if (sCallback != null) {
+                    sCallback.onCancelClicked();
+                }
                 clearSharedPreferences(context);
                 storeAskLaterDate(context);
             }
@@ -278,6 +274,27 @@ public class RateThisApp {
         editor.putBoolean(KEY_OPT_OUT, optOut);
         editor.commit();
         mOptOut = optOut;
+    }
+
+    /**
+     * Store install date.
+     * Install date is retrieved from package manager if possible.
+     * @param context
+     * @param editor
+     */
+    private static void storeInstallDate(final Context context, SharedPreferences.Editor editor) {
+        Date installDate = new Date();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            PackageManager packMan = context.getPackageManager();
+            try {
+                PackageInfo pkgInfo = packMan.getPackageInfo(context.getPackageName(), 0);
+                installDate = new Date(pkgInfo.firstInstallTime);
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        editor.putLong(KEY_INSTALL_DATE, installDate.getTime());
+        log("First install: " + installDate.toString());
     }
 
     /**
@@ -321,8 +338,8 @@ public class RateThisApp {
         private int mCriteriaLaunchTimes;
         private int mTitleId = 0;
         private int mMessageId = 0;
-        private int mRateButton = 0;
-        private int mThanksButton = 0;
+        private int mYesButtonId = 0;
+        private int mNoButtonId = 0;
         private int mCancelButton = 0;
 
         /**
@@ -346,7 +363,7 @@ public class RateThisApp {
          * Set title string ID.
          * @param stringId
          */
-        public void setTitle(int stringId) {
+        public void setTitle(@StringRes int stringId) {
             this.mTitleId = stringId;
         }
 
@@ -354,7 +371,7 @@ public class RateThisApp {
          * Set message string ID.
          * @param stringId
          */
-        public void setMessage(int stringId) {
+        public void setMessage(@StringRes int stringId) {
             this.mMessageId = stringId;
         }
         
@@ -362,27 +379,30 @@ public class RateThisApp {
          * Set rate now string ID.
          * @param stringId
          */
-        public void setRateButton(int stringId) {
-            this.mRateButton = stringId;
+        public void setYesButtonText(@StringRes int stringId) {
+            this.mYesButtonId = stringId;
         }
         
         /**
          * Set no thanks string ID.
          * @param stringId
          */
-        public void setThanksButton(int stringId) {
-            this.mThanksButton = stringId;
+        public void setNoButtonText(@StringRes int stringId) {
+            this.mNoButtonId = stringId;
         }
         
         /**
          * Set cancel string ID.
          * @param stringId
          */
-        public void setCancelButton(int stringId) {
+        public void setCancelButtonText(@StringRes int stringId) {
             this.mCancelButton = stringId;
         }
     }
 
+    /**
+     * Callback of dialog click event
+     */
     public interface Callback {
         /**
          * "Rate now" event
