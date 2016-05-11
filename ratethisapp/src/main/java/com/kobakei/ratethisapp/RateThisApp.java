@@ -187,6 +187,15 @@ public class RateThisApp {
         setOptOut(context, true);
     }
 
+    /**
+     * Get count number of the rate dialog launches
+     * @return
+     */
+    public static int getLaunchCount(final Context context){
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        return pref.getInt(KEY_LAUNCH_TIMES, 0);
+    }
+
     private static void showRateDialog(final Context context, AlertDialog.Builder builder) {
         if (sDialogRef != null && sDialogRef.get() != null) {
             // Dialog is already present
