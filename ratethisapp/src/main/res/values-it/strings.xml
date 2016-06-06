@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Vota quest\'app</string>
+    <string name="rta_dialog_message">Se ti piace usare quest\'app, ti dispiacerebbe trovare un momento per votarla? Ti richiederà meno di un minuto. Grazie per il tuo supporto!</string>
+    <string name="rta_dialog_ok">Vota</string>
+    <string name="rta_dialog_cancel">Più tardi</string>
+    <string name="rta_dialog_no">No, grazie</string>
+
+</resources>
