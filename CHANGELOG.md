@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.0.4 (2016/06/08)
+
+- New feature
+  - Add it translation
+
 ## 1.0.3 (2016/04/11)
 
 - New feature
