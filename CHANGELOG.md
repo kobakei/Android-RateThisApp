@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.0.5 (2016/06/13)
+
+- New feature
+  - Add sk translation
+  - Improve ar translation
+
 ## 1.0.4 (2016/06/08)
 
 - New feature
