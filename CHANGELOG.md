@@ -47,7 +47,7 @@
   - Add eu translation
 - Improvement
   - Use real install time from package manager
-- Fix 
+- Fix
   - Cancel callback is not invoked on pressing back key or touching outside.
   - Stacking of multiple rate dialogs
 
