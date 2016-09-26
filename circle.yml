@@ -5,10 +5,16 @@ machine:
     JAVA_OPTS: "-Xms256m -Xmx512m"
     JAVA8_HOME: /usr/lib/jvm/jdk1.8.0
 
+#dependencies:
+#  pre:
+#    - (while :; do echo 'y'; sleep 10; done) | android update sdk --no-ui --all --filter "tools,platform-tools,extra-android-support,extra-android-m2repository"
+#    - (while :; do echo 'y'; sleep 10; done) | android update sdk --no-ui --all --filter "build-tools-24.0.2"
 dependencies:
   pre:
-    - (while :; do echo 'y'; sleep 10; done) | android update sdk --no-ui --all --filter "tools,platform-tools,extra-android-support,extra-android-m2repository"
-    - (while :; do echo 'y'; sleep 10; done) | android update sdk --no-ui --all --filter "build-tools-24.0.2"
+    - mkdir $ANDROID_HOME/licenses
+    - echo "8933bad161af4178b1185d1a37fbf41ea5269c55" >> $ANDROID_HOME/licenses/android-sdk-license
+  override:
+    - ./gradlew dependencies
 
 test:
   override:
