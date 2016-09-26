@@ -7,11 +7,18 @@ machine:
 
 dependencies:
   pre:
-    # CircleCI docs says that these components are preinstalled
-    # but they may be not found.
-    - (while :; do echo 'y'; sleep 10; done) | android update sdk --no-ui --all --filter "tools,platform-tools,extra-android-support,extra-android-m2repository"
-    - (while :; do echo 'y'; sleep 10; done) | android update sdk --no-ui --all --filter "build-tools-23.0.3"
+    - mkdir $ANDROID_HOME/licenses
+    - echo "8933bad161af4178b1185d1a37fbf41ea5269c55" >> $ANDROID_HOME/licenses/android-sdk-license
+  override:
+    - ./gradlew dependencies
 
 test:
   override:
     - ./gradlew test
+
+deployment:
+  release:
+      tag: /\d\.\d{1,2}\.\d{1,2}/
+      owner: kobakei
+      commands:
+        - ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USER -PbintrayKey=BINTRAY_KEY -PdryRun=BINTRAY_DRY_RUN
