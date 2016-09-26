@@ -6,10 +6,9 @@ machine:
     JAVA8_HOME: /usr/lib/jvm/jdk1.8.0
 
 dependencies:
-  dependencies:
-    pre:
-      - (while :; do echo 'y'; sleep 10; done) | android update sdk --no-ui --all --filter "tools,platform-tools,extra-android-support,extra-android-m2repository"
-      - (while :; do echo 'y'; sleep 10; done) | android update sdk --no-ui --all --filter "build-tools-24.0.2"
+  pre:
+    - (while :; do echo 'y'; sleep 10; done) | android update sdk --no-ui --all --filter "tools,platform-tools,extra-android-support,extra-android-m2repository"
+    - (while :; do echo 'y'; sleep 10; done) | android update sdk --no-ui --all --filter "build-tools-24.0.2"
 
 test:
   override:
