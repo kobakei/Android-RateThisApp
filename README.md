@@ -58,12 +58,30 @@ If you want to use your own criteria, please call `RateThisApp.init(Configuratio
 ```java
 // Custom criteria: 3 days and 5 launches
 RateThisApp.Config config = new RateThisApp.Config(3, 5);
-// Custom title ,message and buttons names
+RateThisApp.init(config);
+```
+
+### Custom strings
+
+You can override title, message and button labels.
+
+```java
+RateThisApp.Config config = new RateThisApp.Config();
 config.setTitle(R.string.my_own_title);
 config.setMessage(R.string.my_own_message);
 config.setYesButtonText(R.string.my_own_rate);
 config.setNoButtonText(R.string.my_own_thanks);
 config.setCancelButtonText(R.string.my_own_cancel);
+RateThisApp.init(config);
+```
+
+### Custom url
+
+In default, rate button navigates to the application page on Google Play. You can override this url as below.
+
+```java
+RateThisApp.Config config = new RateThisApp.Config();
+config.setUrl("http://www.example.com");
 RateThisApp.init(config);
 ```
 

@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.1.0 (2016/09/26)
+
+- New feature
+  - Add nl translation
+  - Add `Config.setUrl(String)`. This url is used to create intent when users click rate button.
+- Other
+  - Update gradle, support lib and SDK version. Now minSdkVersion = 9.
+
 ## 1.0.5 (2016/06/13)
 
 - New feature
