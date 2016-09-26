@@ -3,7 +3,7 @@ machine:
     version: oraclejdk8
   environment:
     JAVA_OPTS: "-Xms256m -Xmx512m"
-    ADB_INSTALL_TIMEOUT: 100
+    JAVA8_HOME: /usr/lib/jvm/jdk1.8.0
 
 dependencies:
   pre:
