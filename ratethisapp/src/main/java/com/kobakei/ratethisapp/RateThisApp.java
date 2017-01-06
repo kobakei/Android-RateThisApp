@@ -348,7 +348,7 @@ public class RateThisApp {
         private int mYesButtonId = 0;
         private int mNoButtonId = 0;
         private int mCancelButton = 0;
-        private boolean mCancelable;
+        private boolean mCancelable = true;
 
         /**
          * Constructor with default criteria.
