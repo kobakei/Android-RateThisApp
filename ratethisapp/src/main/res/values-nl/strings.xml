@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Beoordeel de app</string>
+	<string name="rta_dialog_message">We vinden uw mening belangrijk. Als u tevreden bent over onze app dan stellen wij het op prijs als u dat met andere gebruikers wilt delen. Het beoordelen kost minder dan 1 minuut. Bedankt voor uw ondersteuning!</string>
+	<string name="rta_dialog_ok">Beoordeel Nu</string>
+	<string name="rta_dialog_cancel">Later</string>
+	<string name="rta_dialog_no">Nee, Bedankt</string>
+
+</resources>
