@@ -1,9 +1,0 @@
-<resources>
-
-    <string name="rta_dialog_title">Beoordeel deze app</string>
-    <string name="rta_dialog_message">Als deze app u bevalt wilt u dan een momentje nemen om het te beoordelen? Bedankt voor uw steun!</string>
-    <string name="rta_dialog_ok">Nu beoordelen</string>
-    <string name="rta_dialog_cancel">Later</string>
-    <string name="rta_dialog_no">Nee, dank u</string>
-
-</resources>
