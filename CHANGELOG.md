@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.1.1 (2017/01/13)
+
+- New feature
+  - Add cancelable option
+- Fix
+  - Fix dutch translation
+
 ## 1.1.0 (2016/09/26)
 
 - New feature
