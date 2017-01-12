@@ -201,6 +201,7 @@ public class RateThisApp {
         int rateButtonID = sConfig.mYesButtonId != 0 ? sConfig.mYesButtonId : R.string.rta_dialog_ok;
         builder.setTitle(titleId);
         builder.setMessage(messageId);
+        builder.setCancelable(sConfig.mCancelable);
         builder.setPositiveButton(rateButtonID, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -347,6 +348,7 @@ public class RateThisApp {
         private int mYesButtonId = 0;
         private int mNoButtonId = 0;
         private int mCancelButton = 0;
+        private boolean mCancelable = true;
 
         /**
          * Constructor with default criteria.
@@ -412,6 +414,10 @@ public class RateThisApp {
          */
         public void setUrl(String url) {
             this.mUrl = url;
+        }
+
+        public void setCancelable(boolean cancelable) {
+            this.mCancelable = cancelable;
         }
     }
 
