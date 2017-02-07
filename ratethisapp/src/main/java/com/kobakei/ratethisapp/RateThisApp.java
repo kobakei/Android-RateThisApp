@@ -100,7 +100,7 @@ public class RateThisApp {
         editor.putInt(KEY_LAUNCH_TIMES, launchTimes);
         log("Launch times; " + launchTimes);
 
-        editor.commit();
+        editor.apply();
 
         mInstallDate = new Date(pref.getLong(KEY_INSTALL_DATE, 0));
         mLaunchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
@@ -275,7 +275,7 @@ public class RateThisApp {
         Editor editor = pref.edit();
         editor.remove(KEY_INSTALL_DATE);
         editor.remove(KEY_LAUNCH_TIMES);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -287,7 +287,7 @@ public class RateThisApp {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         editor.putBoolean(KEY_OPT_OUT, optOut);
-        editor.commit();
+        editor.apply();
         mOptOut = optOut;
     }
 
@@ -320,7 +320,7 @@ public class RateThisApp {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         editor.putLong(KEY_ASK_LATER_DATE, System.currentTimeMillis());
-        editor.commit();
+        editor.apply();
     }
 
     /**
