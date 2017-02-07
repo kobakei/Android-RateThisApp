@@ -1,16 +1,12 @@
 apply plugin: "com.android.application"
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
-
-    lintOptions {
-      abortOnError false
-    }
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0.0"
     }
@@ -24,6 +20,5 @@ android {
 
 dependencies {
     compile project(':ratethisapp')
-    compile 'com.android.support:support-v4:24.2.1'
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:25.1.1'
 }
