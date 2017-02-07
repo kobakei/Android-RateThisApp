@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.res.builder.RobolectricPackageManager;
@@ -18,10 +18,11 @@ import org.robolectric.shadows.ShadowSystemClock;
 import java.util.Date;
 
 /**
+ * Unit test for RateThisApp class
  * Created by keisuke on 16/03/09.
  */
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowSystemClock.class})
+@RunWith(RobolectricTestRunner.class)
+@Config(sdk = 21, shadows = {ShadowSystemClock.class})
 public class RateThisAppTest {
 
     private static final String PREF_NAME = "RateThisApp";
