@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.1.2 (2017/02/08)
+
+- New feature
+  - Add `getLaunchCount()`
+- Other
+  - Update SDK version and support lib
+  - Add unit tests
+
 ## 1.1.1 (2017/01/13)
 
 - New feature

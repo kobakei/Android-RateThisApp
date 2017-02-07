@@ -29,7 +29,7 @@ publish {
     userOrg = 'kobakei'
     groupId = 'io.github.kobakei'
     artifactId = 'ratethisapp'
-    publishVersion = "1.1.1"
+    publishVersion = "1.1.2"
     desc = 'Android library to show "Rate this app" dialog'
     website = 'https://github.com/kobakei/Android-RateThisApp'
 }
