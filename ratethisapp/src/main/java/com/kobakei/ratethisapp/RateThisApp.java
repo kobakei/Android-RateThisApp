@@ -17,6 +17,7 @@ package com.kobakei.ratethisapp;
 
 import java.lang.ref.WeakReference;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -152,7 +153,7 @@ public class RateThisApp {
             if (mLaunchTimes >= sConfig.mCriteriaLaunchTimes) {
                 return true;
             }
-            long threshold = sConfig.mCriteriaInstallDays * 24 * 60 * 60 * 1000L;   // msec
+            long threshold = TimeUnit.DAYS.toMillis(sConfig.mCriteriaInstallDays);   // msec
             if (new Date().getTime() - mInstallDate.getTime() >= threshold &&
                 new Date().getTime() - mAskLaterDate.getTime() >= threshold) {
                 return true;
