@@ -41,22 +41,22 @@ protected void onStart() {
 
     // Monitor launch times and interval from installation
     RateThisApp.onStart(this);
-    // If the criteria is satisfied, "Rate this app" dialog will be shown
+    // If the condition is satisfied, "Rate this app" dialog will be shown
     RateThisApp.showRateDialogIfNeeded(this);
 }
 ```
 
-### Custom criteria
+### Custom condition
 
-The default criteria to show the dialog is as below:
+In default, the dialog will be shown when **any of** the following conditions is satisfied.
 
 * App is launched more than 10 times
 * App is launched more than 7 days later than installation.
 
-If you want to use your own criteria, please call `RateThisApp.init(Configuration)` in your Application or launcher activity onCreate method.
+If you want to use your own condition, please call `RateThisApp.init(Configuration)` in your Application or launcher activity onCreate method.
 
 ```java
-// Custom criteria: 3 days and 5 launches
+// Custom condition: 3 days and 5 launches
 RateThisApp.Config config = new RateThisApp.Config(3, 5);
 RateThisApp.init(config);
 ```
