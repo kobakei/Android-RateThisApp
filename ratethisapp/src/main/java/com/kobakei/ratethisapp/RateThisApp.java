@@ -152,7 +152,7 @@ public class RateThisApp {
             if (mLaunchTimes >= sConfig.mCriteriaLaunchTimes) {
                 return true;
             }
-            long threshold = sConfig.mCriteriaInstallDays * 24 * 60 * 60 * 1000L;	// msec
+            long threshold = sConfig.mCriteriaInstallDays * 24 * 60 * 60 * 1000L;   // msec
             if (new Date().getTime() - mInstallDate.getTime() >= threshold &&
                 new Date().getTime() - mAskLaterDate.getTime() >= threshold) {
                 return true;
