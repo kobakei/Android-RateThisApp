@@ -1,0 +1,9 @@
+<resources>
+    
+	  <string name="rta_dialog_title">Bu tətbiqi dəyərləndirin</string>
+    <string name="rta_dialog_message">Əgər tətbiqdən razı qaldınızsa, zəhmət olmasa bir neçə saniyənizi ayırıb tətbiqi dəyərləndirin. Dəstəyiniz üçün təşəkkür edirik!</string>
+    <string name="rta_dialog_ok">Qiymətləndir</string>
+    <string name="rta_dialog_cancel">Sonra xatırlat</string>
+    <string name="rta_dialog_no">İmtina et</string>
+
+</resources>	
