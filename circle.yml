@@ -28,5 +28,5 @@ deployment:
       tag: /\d\.\d{1,2}\.\d{1,2}/
       owner: kobakei
       commands:
-        - ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USER -PbintrayKey=BINTRAY_KEY -PdryRun=BINTRAY_DRY_RUN
+        - ./gradlew clean build bintrayUpload -PbintrayUser=$BINTRAY_USER -PbintrayKey=$BINTRAY_KEY -PdryRun=$BINTRAY_DRY_RUN
         - cp -r ratethisapp/build/outputs $CIRCLE_ARTIFACTS
