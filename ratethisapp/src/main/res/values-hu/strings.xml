@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Értékeld az alkalmazást</string>
+    <string name="rta_dialog_message">Ha tetszik az alkalmazás kérlek értékeld. Csak egy percet vesz igénybe. Köszönöm a segítségedet!</string>
+    <string name="rta_dialog_ok">Értékelem</string>
+    <string name="rta_dialog_cancel">Később</string>
+    <string name="rta_dialog_no">Nem most</string>
+
+</resources>
