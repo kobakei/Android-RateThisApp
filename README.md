@@ -2,7 +2,7 @@ Android-RateThisApp
 ===================
 
 [![Build Status](https://circleci.com/gh/kobakei/Android-RateThisApp.svg?style=shield)](https://circleci.com/gh/kobakei/Android-RateThisApp/tree/master)
-[ ![Download](https://api.bintray.com/packages/kobakei/maven/ratethisapp/images/download.svg) ](https://bintray.com/kobakei/maven/ratethisapp/_latestVersion)
+[![Download](https://api.bintray.com/packages/kobakei/maven/ratethisapp/images/download.svg) ](https://bintray.com/kobakei/maven/ratethisapp/_latestVersion)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--RateThisApp-green.svg?style=true)](https://android-arsenal.com/details/1/2893)
 
 Android-RateThisApp is an library to show "Rate this app" dialog.
@@ -45,6 +45,10 @@ protected void onStart() {
     RateThisApp.showRateDialogIfNeeded(this);
 }
 ```
+
+That's all! You can see "Rate this app" dialog at an appropriate timing.
+
+## Advanced usages
 
 ### Custom condition
 
