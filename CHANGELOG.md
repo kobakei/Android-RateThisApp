@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.1.3 (2017/03/23)
+
+- New feature
+  - Add hu and az translations
+- Other
+  - Update SDK version and support lib
+
 ## 1.1.2 (2017/02/08)
 
 - New feature
