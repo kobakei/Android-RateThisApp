@@ -32,12 +32,13 @@ x.y.z is [ ![Download](https://api.bintray.com/packages/kobakei/maven/ratethisap
 
 ### Basic usage
 
-Call `RateThisApp.onStart(Context)` and `RateThisApp.showRateDialogIfNeeded(Context)` in your launcher activity's onStart() method.
+Call `RateThisApp.onStart(Context)` and `RateThisApp.showRateDialogIfNeeded(Context)` in your launcher activity's onCreate() method.
 
 ```java
 @Override
-protected void onStart() {
-    super.onStart();
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
     // Monitor launch times and interval from installation
     RateThisApp.onStart(this);
