@@ -219,12 +219,15 @@ public class RateThisApp {
                     sCallback.onYesClicked();
                 }
                 String appPackage = context.getPackageName();
-                String url = "https://play.google.com/store/apps/details?id=" + appPackage;
+                String url = "market://details?id=" + appPackage;
                 if (!TextUtils.isEmpty(sConfig.mUrl)) {
                     url = sConfig.mUrl;
                 }
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                context.startActivity(intent);
+                try {
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.getPackageName())));
+                } catch (android.content.ActivityNotFoundException anfe) {
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+                }
                 setOptOut(context, true);
             }
         });
