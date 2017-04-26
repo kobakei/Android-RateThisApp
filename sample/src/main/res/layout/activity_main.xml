@@ -12,18 +12,18 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show dialog with default style"
+        android:text="@string/show_dialog_with_default_style"
         android:id="@+id/button1" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show dialog with custom style"
+        android:text="@string/show_dialog_with_custom_style"
         android:id="@+id/button2" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Stop rate dialog"
+        android:text="@string/stop_rate_dialog"
         android:id="@+id/button3" />
 </LinearLayout>
