@@ -41,7 +41,7 @@ protected void onCreate(Bundle savedInstanceState) {
     setContentView(R.layout.activity_main);
 
     // Monitor launch times and interval from installation
-    RateThisApp.onStart(this);
+    RateThisApp.onCreate(this);
     // If the condition is satisfied, "Rate this app" dialog will be shown
     RateThisApp.showRateDialogIfNeeded(this);
 }

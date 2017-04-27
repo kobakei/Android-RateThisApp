@@ -87,13 +87,9 @@ public class MainActivity extends AppCompatActivity {
                 RateThisApp.stopRateDialog(MainActivity.this);
             }
         });
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
         // Monitor launch times and interval from installation
-        RateThisApp.onStart(this);
+        RateThisApp.onCreate(this);
         // Show a dialog if criteria is satisfied
         RateThisApp.showRateDialogIfNeeded(this);
     }

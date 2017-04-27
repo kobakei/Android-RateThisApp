@@ -1,5 +1,5 @@
 /*
- * Copyright 2013-2015 Keisuke Kobayashi
+ * Copyright 2013-2017 Keisuke Kobayashi
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,10 +85,10 @@ public class RateThisApp {
 
     /**
      * Call this API when the launcher activity is launched.<br>
-     * It is better to call this API in onStart() of the launcher activity.
+     * It is better to call this API in onCreate() of the launcher activity.
      * @param context Context
      */
-    public static void onStart(Context context) {
+    public static void onCreate(Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         // If it is the first launch, save the date in shared preference.
@@ -109,6 +109,16 @@ public class RateThisApp {
         mAskLaterDate = new Date(pref.getLong(KEY_ASK_LATER_DATE, 0));
 
         printStatus(context);
+    }
+
+    /**
+     * This API is deprecated.
+     * You should call onCreate instead of this API in Activity's onCreate().
+     * @param context
+     */
+    @Deprecated
+    public static void onStart(Context context) {
+        onCreate(context);
     }
 
     /**
@@ -224,7 +234,7 @@ public class RateThisApp {
                     url = sConfig.mUrl;
                 }
                 try {
-                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + context.getPackageName())));
+                    context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
                 } catch (android.content.ActivityNotFoundException anfe) {
                     context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
                 }
@@ -271,7 +281,7 @@ public class RateThisApp {
 
     /**
      * Clear data in shared preferences.<br>
-     * This API is called when the rate dialog is approved or canceled.
+     * This API is called when the "Later" is pressed or canceled.
      * @param context
      */
     private static void clearSharedPreferences(Context context) {
@@ -283,7 +293,9 @@ public class RateThisApp {
     }
 
     /**
-     * Set opt out flag. If it is true, the rate dialog will never shown unless app data is cleared.
+     * Set opt out flag.
+     * If it is true, the rate dialog will never shown unless app data is cleared.
+     * This method is called when Yes or No is pressed.
      * @param context
      * @param optOut
      */
