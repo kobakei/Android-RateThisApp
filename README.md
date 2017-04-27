@@ -32,7 +32,7 @@ x.y.z is [ ![Download](https://api.bintray.com/packages/kobakei/maven/ratethisap
 
 ### Basic usage
 
-Call `RateThisApp.onStart(Context)` and `RateThisApp.showRateDialogIfNeeded(Context)` in your launcher activity's onCreate() method.
+Call `RateThisApp.onCreate(Context)` and `RateThisApp.showRateDialogIfNeeded(Context)` in your launcher activity's onCreate() method.
 
 ```java
 @Override
