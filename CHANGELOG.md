@@ -1,5 +1,13 @@
 # Change Log
 
+## 1.2.0 (2017/04/27)
+
+- New feature
+  - `RateThisApp.onStart` is deprecated. Please call `RateThisApp.onCreate` instead.
+- Other
+  - Refactoring
+  - SDK update
+
 ## 1.1.3 (2017/03/23)
 
 - New feature
