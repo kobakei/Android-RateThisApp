@@ -241,25 +241,30 @@ public class RateThisApp {
                 setOptOut(context, true);
             }
         });
-        builder.setNeutralButton(cancelButtonID, new OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (sCallback != null) {
-                    sCallback.onCancelClicked();
+
+        if(sConfig.mShowCancelButton) {
+            builder.setNeutralButton(cancelButtonID, new OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (sCallback != null) {
+                        sCallback.onCancelClicked();
+                    }
+                    clearSharedPreferences(context);
+                    storeAskLaterDate(context);
                 }
-                clearSharedPreferences(context);
-                storeAskLaterDate(context);
-            }
-        });
-        builder.setNegativeButton(thanksButtonID, new OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (sCallback != null) {
-                    sCallback.onNoClicked();
+            });
+        }
+        if(sConfig.mShowNegativeButton) {
+            builder.setNegativeButton(thanksButtonID, new OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (sCallback != null) {
+                        sCallback.onNoClicked();
+                    }
+                    setOptOut(context, true);
                 }
-                setOptOut(context, true);
-            }
-        });
+            });
+        }
         builder.setOnCancelListener(new OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -374,6 +379,8 @@ public class RateThisApp {
         private int mNoButtonId = 0;
         private int mCancelButton = 0;
         private boolean mCancelable = true;
+        private boolean mShowNegativeButton = true;
+        private boolean mShowCancelButton = true;
 
         /**
          * Constructor with default criteria.
@@ -443,6 +450,14 @@ public class RateThisApp {
 
         public void setCancelable(boolean cancelable) {
             this.mCancelable = cancelable;
+        }
+
+        public void showNegativeButton(boolean show){
+            this.mShowNegativeButton = show;
+        }
+
+        public void showCancelButton(boolean show){
+            this.mShowCancelButton = show;
         }
     }
 
