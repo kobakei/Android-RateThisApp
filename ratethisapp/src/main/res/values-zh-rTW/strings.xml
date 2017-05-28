@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">請為這個App投票</string>
+    <string name="rta_dialog_message">如果你喜歡這個App，請花些時間為這個App投票。不需要用上一分鐘，就可以做到。謝謝你們的支持！</string>
+    <string name="rta_dialog_ok">投票！</string>
+    <string name="rta_dialog_cancel">之後提醒</string>
+    <string name="rta_dialog_no">不用了，謝謝</string>
+
+</resources>
