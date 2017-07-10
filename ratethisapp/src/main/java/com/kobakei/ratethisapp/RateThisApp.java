@@ -34,6 +34,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 
 /**
  * RateThisApp<br>
@@ -221,7 +222,28 @@ public class RateThisApp {
         int rateButtonID = sConfig.mYesButtonId != 0 ? sConfig.mYesButtonId : R.string.rta_dialog_ok;
         builder.setTitle(titleId);
         builder.setMessage(messageId);
-        builder.setCancelable(sConfig.mCancelable);
+        switch (sConfig.mCancelMode) {
+            case Config.CANCEL_MODE_BACK_KEY_OR_TOUCH_OUTSIDE:
+                builder.setCancelable(true); // It's the default anyway
+                break;
+            case Config.CANCEL_MODE_BACK_KEY:
+                builder.setCancelable(false);
+                builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                    @Override
+                    public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                        if (keyCode == KeyEvent.KEYCODE_BACK) {
+                            dialog.cancel();
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+                break;
+            case Config.CANCEL_MODE_NONE:
+                builder.setCancelable(false);
+                break;
+        }
         builder.setPositiveButton(rateButtonID, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -365,6 +387,10 @@ public class RateThisApp {
      * RateThisApp configuration.
      */
     public static class Config {
+        public static final int CANCEL_MODE_BACK_KEY_OR_TOUCH_OUTSIDE = 0;
+        public static final int CANCEL_MODE_BACK_KEY                  = 1;
+        public static final int CANCEL_MODE_NONE                      = 2;
+
         private String mUrl = null;
         private int mCriteriaInstallDays;
         private int mCriteriaLaunchTimes;
@@ -373,7 +399,7 @@ public class RateThisApp {
         private int mYesButtonId = 0;
         private int mNoButtonId = 0;
         private int mCancelButton = 0;
-        private boolean mCancelable = true;
+        private int mCancelMode = CANCEL_MODE_BACK_KEY_OR_TOUCH_OUTSIDE;
 
         /**
          * Constructor with default criteria.
@@ -441,8 +467,12 @@ public class RateThisApp {
             this.mUrl = url;
         }
 
-        public void setCancelable(boolean cancelable) {
-            this.mCancelable = cancelable;
+        /**
+          * Set the cancel mode; namely, which ways the user can cancel the dialog.
+          * @param cancelMode
+          */
+        public void setCancelMode(int cancelMode) {
+            this.mCancelMode = cancelMode;
         }
     }
 
