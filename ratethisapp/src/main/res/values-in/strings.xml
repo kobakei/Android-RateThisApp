@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="rta_dialog_title">Beri nilai aplikasi ini</string>
+    <string name="rta_dialog_message">If you enjoy using this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thank you for your support!</string>
+    <string name="rta_dialog_message">Jika anda menyukai aplikasi ini, maukah anda meluangkan waktu sebentar untuk menilai aplikasi? Ini tidak akan memakan waktu lebih dari 1 menit. Terima kasih atas dukungan anda!</string>
+    <string name="rta_dialog_ok">Beri nilai sekarang</string>
+    <string name="rta_dialog_cancel">Nanti</string>
+    <string name="rta_dialog_no">Tidak, terima kasih</string>
+
+</resources>
