@@ -211,11 +211,11 @@ public class RateThisApp {
             return;
         }
 
-        int titleId = sConfig.mTitleId != 0 ? sConfig.mTitleId : R.string.rta_title;
-        int messageId = sConfig.mMessageId != 0 ? sConfig.mMessageId : R.string.rta_message;
-        int cancelButtonID = sConfig.mCancelButton != 0 ? sConfig.mCancelButton : R.string.rta_cancel;
-        int thanksButtonID = sConfig.mNoButtonId != 0 ? sConfig.mNoButtonId : R.string.rta_no;
-        int rateButtonID = sConfig.mYesButtonId != 0 ? sConfig.mYesButtonId : R.string.rta_yes;
+        int titleId = sConfig.mTitleId != 0 ? sConfig.mTitleId : R.string.rta_dialog_title;
+        int messageId = sConfig.mMessageId != 0 ? sConfig.mMessageId : R.string.rta_dialog_message;
+        int cancelButtonID = sConfig.mCancelButton != 0 ? sConfig.mCancelButton : R.string.rta_dialog_cancel;
+        int thanksButtonID = sConfig.mNoButtonId != 0 ? sConfig.mNoButtonId : R.string.rta_dialog_no;
+        int rateButtonID = sConfig.mYesButtonId != 0 ? sConfig.mYesButtonId : R.string.rta_dialog_ok;
         builder.setTitle(titleId);
         builder.setMessage(messageId);
         switch (sConfig.mCancelMode) {
