@@ -1,20 +1,3 @@
-/*
- * Copyright 2013-2017 Keisuke Kobayashi
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package com.kobakei.ratethisapp;
-
 import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -61,6 +44,9 @@ public class RateThisApp {
     private static Callback sCallback = null;
     // Weak ref to avoid leaking the context
     private static WeakReference<AlertDialog> sDialogRef = null;
+
+    private static AlertDialog dialog;
+    private static AlertDialog.Builder builder;
 
     /**
      * If true, print LogCat
@@ -166,7 +152,7 @@ public class RateThisApp {
             }
             long threshold = TimeUnit.DAYS.toMillis(sConfig.mCriteriaInstallDays);   // msec
             if (new Date().getTime() - mInstallDate.getTime() >= threshold &&
-                new Date().getTime() - mAskLaterDate.getTime() >= threshold) {
+                    new Date().getTime() - mAskLaterDate.getTime() >= threshold) {
                 return true;
             }
             return false;
@@ -178,7 +164,8 @@ public class RateThisApp {
      * @param context
      */
     public static void showRateDialog(final Context context) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder = new AlertDialog.Builder(context);
+        dialog = builder.create();
         showRateDialog(context, builder);
     }
 
@@ -188,8 +175,17 @@ public class RateThisApp {
      * @param themeId
      */
     public static void showRateDialog(final Context context, int themeId) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, themeId);
+        builder = new AlertDialog.Builder(context, themeId);
+        dialog = builder.create();
         showRateDialog(context, builder);
+    }
+
+    /**
+     * Dismiss the rate dialog
+     */
+    public static void dismissRateDialog() {
+        if (dialog != null)
+            dialog.dismiss();
     }
 
     /**
@@ -298,7 +294,10 @@ public class RateThisApp {
                 sDialogRef.clear();
             }
         });
-        sDialogRef = new WeakReference<>(builder.show());
+
+        dialog = builder.create();
+        sDialogRef = new WeakReference<>(dialog);
+        dialog.show();
     }
 
     /**
@@ -468,9 +467,9 @@ public class RateThisApp {
         }
 
         /**
-          * Set the cancel mode; namely, which ways the user can cancel the dialog.
-          * @param cancelMode
-          */
+         * Set the cancel mode; namely, which ways the user can cancel the dialog.
+         * @param cancelMode
+         */
         public void setCancelMode(int cancelMode) {
             this.mCancelMode = cancelMode;
         }
