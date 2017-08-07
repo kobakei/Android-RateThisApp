@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">請為這個App評分</string>
+    <string name="rta_dialog_message">如果你喜歡這個App，請花不到一分鐘的時間為這個App評分。謝謝支持！</string>
+    <string name="rta_dialog_ok">立即評分</string>
+    <string name="rta_dialog_cancel">之後提醒</string>
+    <string name="rta_dialog_no">不用了，謝謝</string>
+
+</resources>
