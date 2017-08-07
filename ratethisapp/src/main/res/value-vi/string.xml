@@ -1,0 +1,8 @@
+<resources>
+
+    <string name="rta_dialog_title">Đánh giá ứng dụng này</string>
+    <string name="rta_dialog_message">Nếu bạn thích ứng dụng này, bạn có phiền nếu dành một chút thời gian để đánh giá ứng dụng? Nó sẽ không mất thời gian của bạn hơn một phút. Cám ơn sự hỗ trợ của bạn rất nhiều!</string>
+    <string name="rta_dialog_ok">Rate ngay và luôn</string>
+    <string name="rta_dialog_cancel">Để sau nha</string>
+    <string name="rta_dialog_no">Không hiện lại nữa</string>
+</resources>
