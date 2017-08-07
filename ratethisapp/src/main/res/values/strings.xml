@@ -1,9 +1,9 @@
 <resources>
 
-    <string name="rta_dialog_title">Rate this app</string>
-    <string name="rta_dialog_message">If you enjoy using this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thank you for your support!</string>
-    <string name="rta_dialog_ok">Rate now</string>
-    <string name="rta_dialog_cancel">Later</string>
-    <string name="rta_dialog_no">No, thanks</string>
+    <string name="rta_dialog_title">Đánh giá ứng dụng này</string>
+    <string name="rta_dialog_message">Nếu bạn thích ứng dụng này, bạn có phiền nếu dành một chút thời gian để đánh giá ứng dụng? Nó sẽ không mất thời gian của bạn hơn một phút. Cám ơn sự hỗ trợ của bạn rất nhiều!</string>
+    <string name="rta_dialog_ok">Rate ngay và luôn</string>
+    <string name="rta_dialog_cancel">Để sau nha</string>
+    <string name="rta_dialog_no">Không hiện lại nữa</string>
 
 </resources>
