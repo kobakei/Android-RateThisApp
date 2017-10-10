@@ -158,19 +158,13 @@ public class RateThisApp {
      * @return
      */
     public static boolean shouldShowRateDialog() {
-        if (mOptOut) {
-            return false;
-        } else {
-            if (mLaunchTimes >= sConfig.mCriteriaLaunchTimes) {
-                return true;
-            }
-            long threshold = TimeUnit.DAYS.toMillis(sConfig.mCriteriaInstallDays);   // msec
-            if (new Date().getTime() - mInstallDate.getTime() >= threshold &&
-                new Date().getTime() - mAskLaterDate.getTime() >= threshold) {
-                return true;
-            }
-            return false;
-        }
+        long threshold = TimeUnit.DAYS.toMillis(sConfig.mCriteriaInstallDays);   // msec
+        long nowTime = new Date().getTime();
+        log("nowTime = " + nowTime);
+        log("mInstallDate.getTime() = " + mInstallDate.getTime());
+        log("mAskLaterDate.getTime() = " + mAskLaterDate.getTime());
+        log("installDate = " + (nowTime - mInstallDate.getTime()) + "  ||  askLaterDate = " + (nowTime - mAskLaterDate.getTime()));
+        return !mOptOut && (nowTime - mInstallDate.getTime() >= threshold) && (nowTime - mAskLaterDate.getTime() >= threshold) && (mLaunchTimes >= sConfig.mCriteriaLaunchTimes);
     }
 
     /**
