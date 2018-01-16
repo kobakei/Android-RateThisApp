@@ -355,10 +355,12 @@ public class RateThisApp {
      * @param context
      */
     private static void storeAskLaterDate(final Context context) {
+        long currentTime = System.currentTimeMillis();
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
-        editor.putLong(KEY_ASK_LATER_DATE, System.currentTimeMillis());
+        editor.putLong(KEY_ASK_LATER_DATE, currentTime);
         editor.apply();
+        mAskLaterDate.setTime(currentTime);
     }
 
     /**
