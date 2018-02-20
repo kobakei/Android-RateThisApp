@@ -15,10 +15,6 @@
  */
 package com.kobakei.ratethisapp;
 
-import java.lang.ref.WeakReference;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -35,6 +31,10 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+
+import java.lang.ref.WeakReference;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * RateThisApp<br>
@@ -161,15 +161,20 @@ public class RateThisApp {
         if (mOptOut) {
             return false;
         } else {
-            if (mLaunchTimes >= sConfig.mCriteriaLaunchTimes) {
-                return true;
-            }
+            boolean launchTimesFulfilled = mLaunchTimes >= sConfig.mCriteriaLaunchTimes;
+
             long threshold = TimeUnit.DAYS.toMillis(sConfig.mCriteriaInstallDays);   // msec
-            if (new Date().getTime() - mInstallDate.getTime() >= threshold &&
-                new Date().getTime() - mAskLaterDate.getTime() >= threshold) {
-                return true;
+            boolean installThresholdFulfilled =
+                    new Date().getTime() - mInstallDate.getTime() >= threshold &&
+                    new Date().getTime() - mAskLaterDate.getTime() >= threshold;
+
+            boolean answer = false;
+            switch (sConfig.mCondition) {
+                case AND: answer = launchTimesFulfilled && installThresholdFulfilled; break;
+                case OR:  answer = launchTimesFulfilled || installThresholdFulfilled; break;
             }
-            return false;
+
+            return answer;
         }
     }
 
@@ -400,6 +405,7 @@ public class RateThisApp {
         private int mNoButtonId = 0;
         private int mCancelButton = 0;
         private int mCancelMode = CANCEL_MODE_BACK_KEY_OR_TOUCH_OUTSIDE;
+        private RateConditionsEnum mCondition = RateConditionsEnum.OR;
 
         /**
          * Constructor with default criteria.
@@ -474,6 +480,10 @@ public class RateThisApp {
         public void setCancelMode(int cancelMode) {
             this.mCancelMode = cancelMode;
         }
+
+        public void setOrCondition() { this.mCondition = RateConditionsEnum.OR; }
+
+        public void setAndCondition(){ this.mCondition = RateConditionsEnum.AND; }
     }
 
     /**
