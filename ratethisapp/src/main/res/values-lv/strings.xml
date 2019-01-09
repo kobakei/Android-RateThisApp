@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="rta_dialog_title">Novērtējiet šo lietotni</string>
+    <string name="rta_dialog_message">Ja jums patīk šī lietojumprogramma, vai jūs domājat par to, lai novērtētu to? Tas ilgs vairāk nekā minūti. Paldies par atbalstu!</string>
+    <string name="rta_dialog_ok">Tagad</string>
+    <string name="rta_dialog_cancel">Vēlāk</string>
+    <string name="rta_dialog_no">Nē, paldies</string>
+
+</resources>
