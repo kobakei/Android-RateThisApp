@@ -290,6 +290,7 @@ public class RateThisApp {
                 }
                 clearSharedPreferences(context);
                 storeAskLaterDate(context);
+                storeAskLaterDate(context);
             }
         });
         builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -311,6 +312,7 @@ public class RateThisApp {
         Editor editor = pref.edit();
         editor.remove(KEY_INSTALL_DATE);
         editor.remove(KEY_LAUNCH_TIMES);
+        editor.remove(KEY_OPT_OUT);
         editor.apply();
     }
 
@@ -358,6 +360,17 @@ public class RateThisApp {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         editor.putLong(KEY_ASK_LATER_DATE, System.currentTimeMillis());
+        editor.apply();
+    }
+    
+    /**
+     * Store the date the user asked for being asked again later.
+     * @param context
+     */
+    private static void storeAskLaterTimes(final Context context) {
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        Editor editor = pref.edit();
+        editor.putInt(KEY_LAUNCH_TIMES, 0);
         editor.apply();
     }
 
